@@ -1,0 +1,382 @@
+﻿<Window
+    x:Class="JuegoPeliculas.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:JuegoPeliculas"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Height="450"
+    Width="800"
+    MinHeight="500"
+    Background="#EAE2B7">
+
+    <!--
+    Azul - 003049
+    Rojo - D62828
+    Naranja - F77F00
+    Naranja clarito - FCBF49
+    Amarillo clarito -EAE2B7
+    -->
+
+    <Window.Resources>
+    
+        <!-- Border generico-->
+        <Style
+            TargetType="{x:Type Border}">
+            <Setter
+                Property="BorderThickness"
+                Value="1"></Setter>
+            <Setter
+                Property="BorderBrush"
+                Value="#FF003049"></Setter>
+            <Setter
+                Property="Padding"
+                Value="8"></Setter>
+            <Setter
+                Property="CornerRadius"
+                Value="3"></Setter>
+
+        </Style>
+
+        <!-- Button generico-->
+        <Style
+            TargetType="{x:Type Button}">
+
+            <Setter
+                Property="Margin"
+                Value="8"></Setter>
+        </Style>
+
+        <!-- TextBlock generico-->
+        <Style
+            TargetType="{x:Type TextBlock}">
+
+            <Setter
+                Property="Margin"
+                Value="4"></Setter>
+        </Style>
+
+        <!-- TextBox generico-->
+        <Style
+            TargetType="{x:Type TextBox}">
+            <Setter
+                Property="Width"
+                Value="100"></Setter>
+            <Setter
+                Property="Margin"
+                Value="4"></Setter>
+        </Style>
+
+
+        <!-- TextBox PISTA-->
+        <Style
+            TargetType="{x:Type TextBox}"
+            BasedOn="{StaticResource {x:Type TextBox}}"
+            x:Key="textoPista">
+            <Setter
+                Property="Visibility"
+                Value="Hidden"></Setter>
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding ElementName=verPistaCheckBox, Path=IsChecked}"
+                    Value="True">
+                    <Setter
+                        Property="Visibility"
+                        Value="Visible"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- StackPanel generico-->
+        <Style
+            TargetType="{x:Type StackPanel}">
+
+            <Setter
+                Property="HorizontalAlignment"
+                Value="Center"></Setter>
+            <Setter
+                Property="VerticalAlignment"
+                Value="Center"></Setter>
+
+        </Style>
+
+
+    </Window.Resources>
+
+    <Grid>
+
+        <TabControl
+            Background="#EAE2B7">
+            <TabItem
+                Background="#EAE2B7"
+                Template="{DynamicResource TabItemControlTemplate1}">
+                <TabItem.Header>
+                    <StackPanel
+                        Background="#EAE2B7"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="Jugar"
+                            Foreground="#003049" />
+                    </StackPanel>
+                </TabItem.Header>
+                <!--Contenido Vista Juego-->
+
+                <DockPanel>
+
+                    <StackPanel
+                        DockPanel.Dock="Bottom"
+                        Orientation="Horizontal">
+                        <Image
+                            Margin="5"
+                            Width="15"
+                            Source="assets/arrow_icon.png"></Image>
+                        <Label>
+                            <TextBlock>
+                                    <Run
+                                    Text="1"></Run>
+                                    <Run
+                                    Text="/"></Run>
+                                    <Run
+                                    Text="5"></Run>
+                            </TextBlock>
+                        </Label>
+                        <Image
+                            Margin="5"
+                            Width="15"
+                            Source="assets/arrow_icon.png"
+                            RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform
+                                        ScaleY="1"
+                                        ScaleX="-1" />
+                                    <SkewTransform
+                                        AngleY="0"
+                                        AngleX="0" />
+                                    <RotateTransform
+                                        Angle="0" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </StackPanel>
+                    <Grid
+                        Margin="10"
+                        DockPanel.Dock="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                MinWidth="360"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                MinHeight="140"></RowDefinition>
+                            <RowDefinition
+                                Height="80"></RowDefinition>
+                            <RowDefinition
+                                Height="80"></RowDefinition>
+                            <RowDefinition
+                                Height="80">
+                            </RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel
+                            Grid.Row="0"
+                            Orientation="Horizontal">
+                            <StackPanel>
+                                <Label>Puntuación</Label>
+                                <Border>
+                                    <StackPanel>
+                                        <TextBlock>
+                                    <Run>Aciertos: </Run>
+                                    <Run
+                                                x:Name="aciertosRun"> </Run>
+                                        </TextBlock>
+                                        <TextBlock>
+                                    <Run>Fallos: </Run>
+                                    <Run
+                                                x:Name="fallosRun"> </Run>
+                                        </TextBlock>
+                                        <TextBlock>
+                                    <Run>Puntuación:</Run>
+                                    <Run
+                                                x:Name="puntuacionRun"></Run>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Column="2"
+                                Grid.Row="0">
+                                <Button
+                                    x:Name="nuevaPartidaButton"
+                                    Click="nuevaPartidaButton_Click">Nueva Partida</Button>
+                                <Button
+                                    x:Name="finPartidaButton"
+                                    Click="finPartidaButton_Click">Finalizar Partida</Button>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            Margin="10">
+                            <Label>Título de la pélícula</Label>
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <TextBox
+                                    Width="260"></TextBox>
+                                <Button
+                                    x:Name="comprobarRespuestaButton">Validar</Button>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="2"
+                            HorizontalAlignment="Left"
+                            Margin="10">
+                            <CheckBox
+                                x:Name="verPistaCheckBox">Ver pista</CheckBox>
+                            <TextBlock
+                                x:Name="pistaTextBlock"
+                                Text="{Binding Path=PeliculaSeleccionada.Pista}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="3">
+                            <Image
+                                x:Name="generoImage"
+                                Source="{Binding Path=PeliculaSeleccionada.Genero}"></Image>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <Image
+                        x:Name="cartelImage"
+                        Stretch="Fill"
+                        DockPanel.Dock="Left"
+                        Margin="10"
+                        Source="{Binding Path=PeliculaSeleccionada.Cartel}"></Image>
+                </DockPanel>
+
+
+            </TabItem>
+
+            <TabItem
+                Background="#EAE2B7"
+                Template="{DynamicResource TabItemControlTemplate1}">
+                <TabItem.Header>
+                    <StackPanel
+                        Background="#EAE2B7"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="Gestionar"
+                            Foreground="#003049" />
+                    </StackPanel>
+                </TabItem.Header>
+
+                <!--Contenido Vista Gestión-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="29.333"></ColumnDefinition>
+                        <ColumnDefinition
+                            Width="547*" />
+                        <ColumnDefinition
+                            Width="210*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                            Height="5.75*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="50,38,50,37">
+                        <Button x:Name="cargarJsonButton"
+                            Click="cargarJsonButton_Click">Cargar de JSON</Button>
+                        <Button
+                            x:Name="guardarJsonButton"
+                            Click="guardarJsonButton_Click">Guardar en JSON</Button>
+                        <Button
+                            x:Name="añadirPeliculaButton"
+                            Click="añadirPeliculaButton_Click">Añadir película</Button>
+                        <Button
+                            x:Name="editarPeliculaButton"
+                            Click="editarPeliculaButton_Click">Editar película</Button>
+                        <Button
+                            x:Name="eliminarPeliculaButton"
+                            Click="eliminarPeliculaButton_Click">Eliminar película</Button>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Margin="149,9,178,10">
+                        <TextBlock>Título de la película</TextBlock>
+                        <TextBox
+                            x:Name="tituloTextBox"></TextBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Margin="149,10,178,9">
+                        <TextBlock>Pista de la película</TextBlock>
+                        <TextBox x:Name="pistaTextBox"></TextBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Margin="149,9,178,9">
+                        <TextBlock>Imagen de la película</TextBlock>
+                        <TextBox
+                            x:Name="imagenTextBox"></TextBox>
+                    </StackPanel>
+                    <Button
+                        x:Name="selectImagenButton"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Click="selectImagenButton_Click">Examinar
+                    </Button>
+                    <StackPanel
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Margin="119,7,148,7">
+                        <TextBlock>Nivel de dificultad</TextBlock>
+                        <ComboBox
+                            x:Name="dificultadComboBox"
+                            Margin="4"></ComboBox>
+                        <TextBlock>Género</TextBlock>
+                        <ComboBox
+                            x:Name="generoComboBox"
+                            Margin="4"></ComboBox>
+                    </StackPanel>
+                    <ListBox
+                        Margin="8"
+                        Grid.ColumnSpan="2">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <Border>
+                            <StackPanel>
+                                <Image></Image>
+                                <TextBlock></TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
