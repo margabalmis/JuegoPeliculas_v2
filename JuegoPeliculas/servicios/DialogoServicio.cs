@@ -9,36 +9,27 @@ using System.Windows;
 
 namespace JuegoPeliculas
 {
-	public partial class FileDialog : Window
+	class FileDialog : Window
 	{
-        string textoJsonCargardo;
-        string textoJsonGuardar;
+		string textoJsonCargar;
+        readonly string textoJsonGuardar;
 
-		public FileDialog()
-		{
-			InitializeComponent();
-		}
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
-        }
-
-        private string OpenFile()
+        public string OpenFile()
         {
 			OpenFileDialog openFileDialog = new OpenFileDialog();
+
 			if (openFileDialog.ShowDialog() == true)
 			{
-				textoJsonCargardo = File.ReadAllText(openFileDialog.FileName);
+				textoJsonCargar = File.ReadAllText(openFileDialog.FileName);
 			}
 			else
 			{
-				
+				//TODO
 			}
-			return textoJsonCargardo;
+			return textoJsonCargar;
 		}
 
-		private void SaveFile()
+		public void SaveFile()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			if (saveFileDialog.ShowDialog() == true)

@@ -7,7 +7,7 @@ namespace JuegoPeliculas
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowVM vm;
+        private  MainWindowVM vm;
         public MainWindow()
         {
             InitializeComponent();
@@ -15,44 +15,44 @@ namespace JuegoPeliculas
             this.DataContext = vm;
         }
 
-        private void cargarJsonButton_Click(object sender, RoutedEventArgs e)
+        private void CargarJsonButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.CargarJson();
         }
 
-        private void guardarJsonButton_Click(object sender, RoutedEventArgs e)
+        private void GuardarJsonButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.GuardarJson();
         }
 
-        private void añadirPeliculaButton_Click(object sender, RoutedEventArgs e)
+        private void AñadirPeliculaButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.AñadirPelicula();
         }
 
-        private void editarPeliculaButton_Click(object sender, RoutedEventArgs e)
+        private void EditarPeliculaButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.EditarPelicula();
         }
 
-        private void eliminarPeliculaButton_Click(object sender, RoutedEventArgs e)
+        private void EliminarPeliculaButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.EliminarPelicula();
         }
 
-        private void selectImagenButton_Click(object sender, RoutedEventArgs e)
+        private void SelectImagenButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.SeleccionarImagen();
         }
 
-        private void nuevaPartidaButton_Click(object sender, RoutedEventArgs e)
+        private void NuevaPartidaButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.NuevaPartida();
         }
 
-        private void finPartidaButton_Click(object sender, RoutedEventArgs e)
+        private void FinPartidaButton_Click(object sender, RoutedEventArgs e)
         {
-
+            vm.FinPartida();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 
@@ -8,11 +9,15 @@ namespace JuegoPeliculas
     class MainWindowVM: ObservableObject
     {
         readonly int NUM_PELIS_JUGAR = 5;
+
         readonly FileDialog dialogo = new FileDialog();
+        readonly JsonServicio json = new JsonServicio();
+
+        ObservableCollection<Pelicula> listaPelisCargadas;
 
         public MainWindowVM()
         {
-            PeliculaSeleccionada = PeliculasSeleccionadasJuego[0];
+            
             NumPelicula = 1;
 
         }
@@ -25,8 +30,29 @@ namespace JuegoPeliculas
             set { SetProperty(ref numPelicula, value); }
         }
 
+        internal void GuardarJson()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void EditarPelicula()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void AñadirPelicula()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void EliminarPelicula()
+        {
+            throw new NotImplementedException();
+        }
+
         //Lista con las péliculas seleccionadas para la partida
         private Pelicula[] peliculasSeleccionadasJuego;
+
         public Pelicula[] PeliculasSeleccionadasJuego
         {
             get { return peliculasSeleccionadasJuego; }
@@ -107,8 +133,10 @@ namespace JuegoPeliculas
 
         public void CargarJson()
         {
-            dialogo.
+            string textoJson;
 
+            textoJson = dialogo.OpenFile();
+            listaPelisCargadas = json.Importar(textoJson);
 
         }
 
@@ -128,6 +156,21 @@ namespace JuegoPeliculas
                 NumPelicula--;
                 PeliculaSeleccionada = PeliculasSeleccionadasJuego[NumPelicula - 1];
             }
+        }
+
+        internal void SeleccionarImagen()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void NuevaPartida()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void FinPartida()
+        {
+            throw new NotImplementedException();
         }
 
     }

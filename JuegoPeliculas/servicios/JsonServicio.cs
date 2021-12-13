@@ -11,11 +11,10 @@ namespace JuegoPeliculas
             string peliJson = JsonConvert.SerializeObject(listaPelis);
             File.WriteAllText(ruta, peliJson);
         }
-        public ObservableCollection<Pelicula> Importar(string ruta)
+        public ObservableCollection<Pelicula> Importar(string textoJson)
         {
-            string peliJson = File.ReadAllText(ruta);
             ObservableCollection<Pelicula> lista = 
-                JsonConvert.DeserializeObject<ObservableCollection<Pelicula>>(peliJson);
+                JsonConvert.DeserializeObject<ObservableCollection<Pelicula>>(textoJson);
 
             return lista;
         }

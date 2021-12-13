@@ -212,10 +212,10 @@
                                 Grid.Row="0">
                                 <Button
                                     x:Name="nuevaPartidaButton"
-                                    Click="nuevaPartidaButton_Click">Nueva Partida</Button>
+                                    Click="NuevaPartidaButton_Click">Nueva Partida</Button>
                                 <Button
                                     x:Name="finPartidaButton"
-                                    Click="finPartidaButton_Click">Finalizar Partida</Button>
+                                    Click="FinPartidaButton_Click">Finalizar Partida</Button>
                             </StackPanel>
                         </StackPanel>
 
@@ -300,19 +300,19 @@
                         Grid.Column="2"
                         Margin="50,38,50,37">
                         <Button x:Name="cargarJsonButton"
-                            Click="cargarJsonButton_Click">Cargar de JSON</Button>
+                            Click="CargarJsonButton_Click">Cargar de JSON</Button>
                         <Button
                             x:Name="guardarJsonButton"
-                            Click="guardarJsonButton_Click">Guardar en JSON</Button>
+                            Click="GuardarJsonButton_Click">Guardar en JSON</Button>
                         <Button
                             x:Name="añadirPeliculaButton"
-                            Click="añadirPeliculaButton_Click">Añadir película</Button>
+                            Click="AñadirPeliculaButton_Click">Añadir película</Button>
                         <Button
                             x:Name="editarPeliculaButton"
-                            Click="editarPeliculaButton_Click">Editar película</Button>
+                            Click="EditarPeliculaButton_Click">Editar película</Button>
                         <Button
                             x:Name="eliminarPeliculaButton"
-                            Click="eliminarPeliculaButton_Click">Eliminar película</Button>
+                            Click="EliminarPeliculaButton_Click">Eliminar película</Button>
                     </StackPanel>
                     <StackPanel
                         Grid.Row="1"
@@ -344,7 +344,7 @@
                         x:Name="selectImagenButton"
                         Grid.Row="3"
                         Grid.Column="2"
-                        Click="selectImagenButton_Click">Examinar
+                        Click="SelectImagenButton_Click">Examinar
                     </Button>
                     <StackPanel
                         Grid.Row="4"
@@ -361,6 +361,8 @@
                             Margin="4"></ComboBox>
                     </StackPanel>
                     <ListBox
+                        ItemsSource="{Binding Path=listaPelisCargadas}"
+                        SelectedItem="{Binding Path=PeliculaSeleccionada }"
                         Margin="8"
                         Grid.ColumnSpan="2">
                         <ListBox.ItemsPanel>
