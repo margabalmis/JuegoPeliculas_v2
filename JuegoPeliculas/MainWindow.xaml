@@ -485,6 +485,7 @@
                             Margin="10,5,0,0"
                             Width="125">Nivel de dificultad</TextBlock>
                         <ComboBox
+                            Template="{DynamicResource ComboBoxControlTemplate}">
                             ItemsSource="{Binding Path=ListaNiveles}"
                             SelectedItem="{Binding Path=PeliculaSeleccionada.Nivel, UpdateSourceTrigger=Explicit}"
                             x:Name="dificultadComboBox"
