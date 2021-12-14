@@ -386,7 +386,7 @@
                             Margin="4"></ComboBox>
                     </StackPanel>
                     <ListBox
-                        ListBox.ItemTemplate="{StaticResource plantillaPelis}"
+                        ItemTemplate="{StaticResource plantillaPelis}"
                         ItemsSource="{Binding Path=ListaPelisCargadas}"
                         SelectedItem="{Binding Path=PeliculaSeleccionada }"
                         Margin="8"
