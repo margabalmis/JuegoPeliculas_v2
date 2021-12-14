@@ -13,13 +13,10 @@ namespace JuegoPeliculas
         readonly FileDialog dialogo = new FileDialog();
         readonly JsonServicio json = new JsonServicio();
 
-        ObservableCollection<Pelicula> listaPelisCargadas;
 
         public MainWindowVM()
         {
-            
             NumPelicula = 1;
-
         }
 
         //Número de película actual
@@ -30,25 +27,6 @@ namespace JuegoPeliculas
             set { SetProperty(ref numPelicula, value); }
         }
 
-        internal void GuardarJson()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void EditarPelicula()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void AñadirPelicula()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void EliminarPelicula()
-        {
-            throw new NotImplementedException();
-        }
 
         //Lista con las péliculas seleccionadas para la partida
         private Pelicula[] peliculasSeleccionadasJuego;
@@ -60,11 +38,11 @@ namespace JuegoPeliculas
         }
 
         //Lista con todas las péliculas
-        private ObservableCollection<Pelicula> listaPeliculas;
-        public ObservableCollection<Pelicula> ListaPeliculas
+        private ObservableCollection<Pelicula> listaPeliculasCargadas;
+        public ObservableCollection<Pelicula> ListaPeliculasCargadas
         {
-            get { return listaPeliculas; }
-            set { SetProperty(ref listaPeliculas, value); }
+            get { return listaPeliculasCargadas; }
+            set { SetProperty(ref listaPeliculasCargadas, value); }
         }
 
 
@@ -75,16 +53,6 @@ namespace JuegoPeliculas
             get { return peliculaSeleccionada; }
             set { SetProperty(ref peliculaSeleccionada, value); }
         }
-
-
-        //Lista con las péliculas seleccionadas para la partida
-        private ArrayList peliculasSeleccionadaJuego;
-        public ArrayList PeliculasSeleccionadaJuego
-        {
-            get { return peliculasSeleccionadaJuego; }
-            set { SetProperty(ref peliculasSeleccionadaJuego, value); }
-        }
-
 
         //Título de la péliculas seleccionada
         private string tituloSelect;
@@ -111,7 +79,6 @@ namespace JuegoPeliculas
             set { SetProperty(ref imagenSelect, value); }
         }
 
-
         //Nivel de dificultad de la péliculas seleccionada
         private string nivelSelect;
         public string NivelSelect
@@ -129,17 +96,14 @@ namespace JuegoPeliculas
             set { SetProperty(ref generoSelect, value); }
         }
 
-
-
         public void CargarJson()
         {
             string textoJson;
 
             textoJson = dialogo.OpenFile();
-            listaPelisCargadas = json.Importar(textoJson);
+            listaPeliculasCargadas = json.Importar(textoJson);
 
         }
-
 
         public void Avanzar()
         {
@@ -149,6 +113,7 @@ namespace JuegoPeliculas
                 PeliculaSeleccionada = PeliculasSeleccionadasJuego[NumPelicula - 1];
             }
         }
+
         public void Retroceder()
         {
             if (NumPelicula > 1)
@@ -169,6 +134,26 @@ namespace JuegoPeliculas
         }
 
         internal void FinPartida()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void GuardarJson()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void EditarPelicula()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void AñadirPelicula()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void EliminarPelicula()
         {
             throw new NotImplementedException();
         }

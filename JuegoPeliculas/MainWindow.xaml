@@ -21,6 +21,20 @@
     -->
 
     <Window.Resources>
+
+        <!--Plantilla Pelis ListBox -->
+        <DataTemplate
+            x:Key="plantillaPelis">
+            <Border>
+                <StackPanel>
+                    <Image 
+                        Source="{Binding Path=Cartel}"></Image>
+                    <TextBlock
+                        Text="{Binding Path=Titulo}"></TextBlock>
+                </StackPanel>
+            </Border>
+            
+        </DataTemplate>
     
         <!-- Border generico-->
         <Style
@@ -361,6 +375,7 @@
                             Margin="4"></ComboBox>
                     </StackPanel>
                     <ListBox
+                        ItemTemplate="{StaticResource plantillaPelis}"
                         ItemsSource="{Binding Path=listaPelisCargadas}"
                         SelectedItem="{Binding Path=PeliculaSeleccionada }"
                         Margin="8"
@@ -370,12 +385,6 @@
                                 <WrapPanel></WrapPanel>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <Border>
-                            <StackPanel>
-                                <Image></Image>
-                                <TextBlock></TextBlock>
-                            </StackPanel>
-                        </Border>
                     </ListBox>
                 </Grid>
             </TabItem>
