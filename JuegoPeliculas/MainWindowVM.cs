@@ -15,6 +15,8 @@ namespace JuegoPeliculas
 
         public MainWindowVM()
         {
+            ListaGeneros = new ObservableCollection<string> { "Terror", "Comedia", "Drama","Acción","Ciencia Ficción"};
+            ListaNiveles = new ObservableCollection<string> { "Fácil", "Normal", "Difícil"};
             NumPelicula = 1;
         }
 
@@ -44,6 +46,22 @@ namespace JuegoPeliculas
             set { SetProperty(ref listaPeliculasCargadas, value); }
         }
 
+        //Lista de géneros de péliculas
+        private ObservableCollection<string> listaGeneros;
+        public ObservableCollection<string> ListaGeneros
+        {
+            get { return listaGeneros; }
+            set { SetProperty(ref listaGeneros, value); }
+        }
+
+        //Lista de niveles de péliculas
+        private ObservableCollection<string> listaNiveles;
+        public ObservableCollection<string> ListaNiveles
+        {
+            get { return listaNiveles; }
+            set { SetProperty(ref listaNiveles, value); }
+        }
+
 
         //Pélicula seleccionada actualmente
         private Pelicula peliculaSeleccionada;
@@ -52,7 +70,7 @@ namespace JuegoPeliculas
             get { return peliculaSeleccionada; }
             set { SetProperty(ref peliculaSeleccionada, value); }
         }
-
+        /*
         //Título de la péliculas seleccionada
         private string tituloSelect;
         public string TituloSelect
@@ -93,7 +111,7 @@ namespace JuegoPeliculas
         {
             get { return generoSelect; }
             set { SetProperty(ref generoSelect, value); }
-        }
+        }*/
 
         public void CargarJson()
         {
@@ -139,22 +157,48 @@ namespace JuegoPeliculas
 
         internal void GuardarJson()
         {
-            throw new NotImplementedException();
+
+            dialogo.SaveFile();
         }
 
         internal void EditarPelicula()
         {
-            throw new NotImplementedException();
+            
         }
 
         internal void AñadirPelicula()
         {
-            throw new NotImplementedException();
+
+            if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
+            {
+                if (PeliculaSeleccionada.Titulo != null &&
+                    PeliculaSeleccionada.Pista != null &&
+                        PeliculaSeleccionada.Cartel != null &&
+                            PeliculaSeleccionada.Nivel != null &&
+                               PeliculaSeleccionada.Genero != null)
+                {
+
+                    ListaPeliculasCargadas.Add(PeliculaSeleccionada);
+
+                }
+                else
+                {
+                    //TODO
+                }
+
+
+            }
+            else
+            {
+                //TODO
+            }
+
         }
 
         internal void EliminarPelicula()
         {
-            throw new NotImplementedException();
+           ListaPeliculasCargadas.Remove(PeliculaSeleccionada);
+            
         }
 
     }

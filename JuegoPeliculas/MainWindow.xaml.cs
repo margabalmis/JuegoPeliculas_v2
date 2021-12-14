@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Data;
 
 namespace JuegoPeliculas
 {
@@ -32,6 +33,7 @@ namespace JuegoPeliculas
 
         private void EditarPeliculaButton_Click(object sender, RoutedEventArgs e)
         {
+            //BindingExpression peliEditar = txtOutput3.GetBindingExpression(TextBox.TextProperty);
             vm.EditarPelicula();
         }
 
@@ -54,5 +56,7 @@ namespace JuegoPeliculas
         {
             vm.FinPartida();
         }
+
+
     }
 }

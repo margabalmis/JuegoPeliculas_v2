@@ -19,9 +19,9 @@
                     Margin="0">
                     <Border
                         x:Name="innerBorder"
-                        BorderBrush="#EAE2B7"
-                        BorderThickness="1,1,1,0"
-                        Background="#EAE2B7"
+                        BorderBrush="#F77F00"
+                        BorderThickness="0,1,1,0"
+                        Background="#F77F00"
                         Margin="-1"
                         Opacity="0" />
                 </Border>
