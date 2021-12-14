@@ -25,7 +25,10 @@
         <!--Plantilla Pelis ListBox -->
         <DataTemplate
             x:Key="plantillaPelis">
-            <Border>
+            <Border
+                Height="50"
+                Width="44"
+                Margin="10">
                 <StackPanel>
                     <Image 
                         Source="{Binding Path=Cartel}"></Image>
@@ -376,10 +379,12 @@
                     </StackPanel>
                     <ListBox
                         ItemTemplate="{StaticResource plantillaPelis}"
-                        ItemsSource="{Binding Path=listaPelisCargadas}"
+                        ItemsSource="{Binding Path=ListaPelisCargadas}"
                         SelectedItem="{Binding Path=PeliculaSeleccionada }"
                         Margin="8"
-                        Grid.ColumnSpan="2">
+                        Grid.ColumnSpan="2"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel></WrapPanel>

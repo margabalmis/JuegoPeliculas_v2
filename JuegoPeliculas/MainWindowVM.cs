@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections;
 using System.Collections.ObjectModel;
 
 namespace JuegoPeliculas
@@ -101,7 +100,7 @@ namespace JuegoPeliculas
             string textoJson;
 
             textoJson = dialogo.OpenFile();
-            listaPeliculasCargadas = json.Importar(textoJson);
+            ListaPeliculasCargadas = json.Importar(textoJson);
 
         }
 
