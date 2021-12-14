@@ -488,8 +488,7 @@
                             ItemsSource="{Binding Path=ListaNiveles}"
                             SelectedItem="{Binding Path=PeliculaSeleccionada.Nivel, UpdateSourceTrigger=Explicit}"
                             x:Name="dificultadComboBox"
-                            Margin="4,4,40,4"
-                            Template="{DynamicResource ComboBoxControlTemplate}"></ComboBox>
+                            Margin="4,4,40,4"></ComboBox>
                         <TextBlock>Género</TextBlock>
                         <ComboBox
                             ItemsSource="{Binding Path=ListaGeneros}"

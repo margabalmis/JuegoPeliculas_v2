@@ -586,7 +586,7 @@
                                         TargetType="{x:Type ToggleButton}">
                                         <Border
                                             x:Name="templateRoot"
-                                            BorderBrush="#FFACACAC"
+                                            BorderBrush="#F77F00"
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             SnapsToDevicePixels="True">
                                             <Border.Background>
@@ -594,7 +594,7 @@
                                                     EndPoint="0,1"
                                                     StartPoint="0,0">
                                                     <GradientStop
-                                                        Color="#FFF0F0F0"
+                                                        Color="#FFF8F6E5"
                                                         Offset="0" />
                                                     <GradientStop
                                                         Color="#FFE5E5E5"
@@ -612,7 +612,7 @@
                                                 <Path
                                                     x:Name="Arrow"
                                                     Data="F1M0,0L2.667,2.66665 5.3334,0 5.3334,-1.78168 2.6667,0.88501 0,-1.78168 0,0z"
-                                                    Fill="#FF606060"
+                                                    Fill="#F77F00"
                                                     HorizontalAlignment="Center"
                                                     Margin="0"
                                                     VerticalAlignment="Center" />
