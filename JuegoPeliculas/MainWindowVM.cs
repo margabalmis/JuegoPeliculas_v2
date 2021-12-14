@@ -70,48 +70,6 @@ namespace JuegoPeliculas
             get { return peliculaSeleccionada; }
             set { SetProperty(ref peliculaSeleccionada, value); }
         }
-        /*
-        //Título de la péliculas seleccionada
-        private string tituloSelect;
-        public string TituloSelect
-        {
-            get { return tituloSelect; }
-            set { SetProperty(ref tituloSelect, value); }
-        }
-
-
-        //Pista de la péliculas seleccionada
-        private string pistaSelect;
-        public string PistaSelect
-        {
-            get { return pistaSelect; }
-            set { SetProperty(ref pistaSelect, value); }
-        }
-
-        //Imagen de la péliculas seleccionada
-        private string imagenSelect;
-        public string ImagenSelect
-        {
-            get { return imagenSelect; }
-            set { SetProperty(ref imagenSelect, value); }
-        }
-
-        //Nivel de dificultad de la péliculas seleccionada
-        private string nivelSelect;
-        public string NivelSelect
-        {
-            get { return nivelSelect; }
-            set { SetProperty(ref nivelSelect, value); }
-        }
-
-
-        //Genero de la péliculas seleccionada
-        private string generoSelect;
-        public string GeneroSelect
-        {
-            get { return generoSelect; }
-            set { SetProperty(ref generoSelect, value); }
-        }*/
 
         public void CargarJson()
         {
@@ -159,11 +117,6 @@ namespace JuegoPeliculas
         {
 
             dialogo.SaveFile();
-        }
-
-        internal void EditarPelicula()
-        {
-            
         }
 
         internal void AñadirPelicula()

@@ -8,8 +8,8 @@ namespace JuegoPeliculas
     {
         public void Exportar(ObservableCollection<Pelicula> listaPelis, string ruta) {
 
-            string peliJson = JsonConvert.SerializeObject(listaPelis);
-            File.WriteAllText(ruta, peliJson);
+            string pelisJson = JsonConvert.SerializeObject(listaPelis);
+            File.WriteAllText(ruta, pelisJson);
         }
         public ObservableCollection<Pelicula> Importar(string textoJson)
         {

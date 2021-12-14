@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace JuegoPeliculas
@@ -33,8 +34,30 @@ namespace JuegoPeliculas
 
         private void EditarPeliculaButton_Click(object sender, RoutedEventArgs e)
         {
-            //BindingExpression peliEditar = txtOutput3.GetBindingExpression(TextBox.TextProperty);
-            vm.EditarPelicula();
+            if (!tituloTextBox.Text.Equals("")  &&
+                    !pistaTextBox.Text.Equals("") &&
+                        !imagenTextBox.Text.Equals(""))
+            {
+
+                BindingExpression peliEditarTitulo = tituloTextBox.GetBindingExpression(TextBox.TextProperty);
+                BindingExpression peliEditarPista = pistaTextBox.GetBindingExpression(TextBox.TextProperty);
+                BindingExpression peliEditarImagen = imagenTextBox.GetBindingExpression(TextBox.TextProperty);
+                BindingExpression peliEditarNivel = dificultadComboBox.GetBindingExpression(ComboBox.SelectedItemProperty);
+                BindingExpression peliEditarGenero = generoComboBox.GetBindingExpression(ComboBox.SelectedItemProperty);
+
+                peliEditarTitulo.UpdateSource();
+                peliEditarPista.UpdateSource();
+                peliEditarImagen.UpdateSource();
+                peliEditarNivel.UpdateSource();
+                peliEditarGenero.UpdateSource();
+
+
+            }
+            else
+            { 
+                //TODO
+            }
+
         }
 
         private void EliminarPeliculaButton_Click(object sender, RoutedEventArgs e)
