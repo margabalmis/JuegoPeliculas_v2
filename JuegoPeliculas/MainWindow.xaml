@@ -26,14 +26,22 @@
         <DataTemplate
             x:Key="plantillaPelis">
             <Border
+                BorderThickness="1"
+                BorderBrush="Black"
                 Height="50"
                 Width="44"
                 Margin="10">
                 <StackPanel>
                     <Image 
-                        Source="{Binding Path=Cartel}"></Image>
+                        Source="{Binding Path=Cartel}"
+                        Height="50"
+                        Width="44"
+                        Margin="10"></Image>
                     <TextBlock
-                        Text="{Binding Path=Titulo}"></TextBlock>
+                        Text="{Binding Path=Titulo}"
+                        Height="50"
+                        Width="44"
+                        Margin="10"></TextBlock>
                 </StackPanel>
             </Border>
             
@@ -378,7 +386,7 @@
                             Margin="4"></ComboBox>
                     </StackPanel>
                     <ListBox
-                        ItemTemplate="{StaticResource plantillaPelis}"
+                        ListBox.ItemTemplate="{StaticResource plantillaPelis}"
                         ItemsSource="{Binding Path=ListaPelisCargadas}"
                         SelectedItem="{Binding Path=PeliculaSeleccionada }"
                         Margin="8"
