@@ -485,13 +485,14 @@
                             Margin="10,5,0,0"
                             Width="125">Nivel de dificultad</TextBlock>
                         <ComboBox
-                            Template="{DynamicResource ComboBoxControlTemplate}">
+                            Template="{DynamicResource ComboBoxControlTemplate}"
                             ItemsSource="{Binding Path=ListaNiveles}"
                             SelectedItem="{Binding Path=PeliculaSeleccionada.Nivel, UpdateSourceTrigger=Explicit}"
                             x:Name="dificultadComboBox"
                             Margin="4,4,40,4"></ComboBox>
                         <TextBlock>Género</TextBlock>
                         <ComboBox
+                            Template="{DynamicResource ComboBoxControlTemplate}"
                             ItemsSource="{Binding Path=ListaGeneros}"
                             SelectedItem="{Binding Path=PeliculaSeleccionada.Genero, UpdateSourceTrigger=Explicit}"
                             x:Name="generoComboBox"

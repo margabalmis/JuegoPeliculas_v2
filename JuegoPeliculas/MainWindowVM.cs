@@ -32,6 +32,11 @@ namespace JuegoPeliculas
         //Lista con las péliculas seleccionadas para la partida
         private Pelicula[] peliculasSeleccionadasJuego;
 
+        internal void EditarPelicula()
+        {
+            throw new NotImplementedException();
+        }
+
         public Pelicula[] PeliculasSeleccionadasJuego
         {
             get { return peliculasSeleccionadasJuego; }

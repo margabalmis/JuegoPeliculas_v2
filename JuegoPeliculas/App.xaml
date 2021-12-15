@@ -594,7 +594,7 @@
                                                     EndPoint="0,1"
                                                     StartPoint="0,0">
                                                     <GradientStop
-                                                        Color="#FFF8F6E5"
+                                                        Color="#EAE2B7"
                                                         Offset="0" />
                                                     <GradientStop
                                                         Color="#FFE5E5E5"
