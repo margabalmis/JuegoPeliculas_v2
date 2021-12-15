@@ -14,7 +14,7 @@ namespace JuegoPeliculas
 		string textoJsonCargar;
         readonly string textoJsonGuardar;
 
-        public string OpenFile()
+        public string OpenFileJson()
         {
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -29,6 +29,21 @@ namespace JuegoPeliculas
 			return textoJsonCargar;
 		}
 
+		public string OpenFileRuta()
+		{
+			string textoRuta= null;
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+
+			if (openFileDialog.ShowDialog() == true)
+			{
+				textoRuta = openFileDialog.FileName;
+			}
+			else
+			{
+				//TODO
+			}
+			return textoRuta;
+		}
 		public void SaveFile()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();

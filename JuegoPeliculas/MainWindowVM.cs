@@ -11,6 +11,7 @@ namespace JuegoPeliculas
 
         readonly FileDialog dialogo = new FileDialog();
         readonly JsonServicio json = new JsonServicio();
+        readonly AzureBlobStorageServicio azure = new AzureBlobStorageServicio();
 
 
         public MainWindowVM()
@@ -31,11 +32,6 @@ namespace JuegoPeliculas
 
         //Lista con las péliculas seleccionadas para la partida
         private Pelicula[] peliculasSeleccionadasJuego;
-
-        internal void EditarPelicula()
-        {
-            throw new NotImplementedException();
-        }
 
         public Pelicula[] PeliculasSeleccionadasJuego
         {
@@ -83,12 +79,30 @@ namespace JuegoPeliculas
             get { return peliculaFormulario; }
             set { SetProperty(ref peliculaFormulario, value); }
         }
+        internal void EditarPelicula()
+        {
+            PeliculaFormulario = PeliculaSeleccionada;
+            if (PeliculaFormulario.Titulo != null &&
+                        PeliculaFormulario.Pista != null &&
+                            PeliculaFormulario.Cartel != null &&
+                                PeliculaFormulario.Nivel != null &&
+                                    PeliculaFormulario.Genero != null)
+            {
+
+                PeliculaSeleccionada = PeliculaFormulario;
+
+            }
+            else
+            { 
+                //TODO
+            }
+        }
 
         public void CargarJson()
         {
             string textoJson;
 
-            textoJson = dialogo.OpenFile();
+            textoJson = dialogo.OpenFileJson();
             ListaPeliculasCargadas = json.Importar(textoJson);
 
         }
@@ -113,7 +127,12 @@ namespace JuegoPeliculas
 
         internal void SeleccionarImagen()
         {
-            throw new NotImplementedException();
+            string ruta;
+            string url;
+
+            ruta = dialogo.OpenFileRuta();
+            url = azure.SubirImagen(ruta);
+
         }
 
         internal void NuevaPartida()
@@ -134,18 +153,25 @@ namespace JuegoPeliculas
 
         internal void AñadirPelicula()
         {
-
-            if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
+            try
             {
-                if (PeliculaSeleccionada.Titulo != null &&
-                        PeliculaSeleccionada.Pista != null &&
-                            PeliculaSeleccionada.Cartel != null &&
-                                PeliculaSeleccionada.Nivel != null &&
-                                    PeliculaSeleccionada.Genero != null)
+
+                if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
                 {
+                    if (PeliculaSeleccionada.Titulo != null &&
+                            PeliculaSeleccionada.Pista != null &&
+                                PeliculaSeleccionada.Cartel != null &&
+                                    PeliculaSeleccionada.Nivel != null &&
+                                        PeliculaSeleccionada.Genero != null)
+                    {
 
-                    ListaPeliculasCargadas.Add(PeliculaSeleccionada);
+                        ListaPeliculasCargadas.Add(PeliculaSeleccionada);
 
+                    }
+                    else
+                    {
+                        //TODO
+                    }
                 }
                 else
                 {
@@ -154,10 +180,11 @@ namespace JuegoPeliculas
 
 
             }
-            else
-            {
-                //TODO
+            catch (NullReferenceException)
+            { 
+                
             }
+            
 
         }
 

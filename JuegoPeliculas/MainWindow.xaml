@@ -25,19 +25,23 @@
         <!--Plantilla Pelis ListBox -->
         <DataTemplate
             x:Key="plantillaPelis">
+
             <Border
                 BorderThickness="1"
                 BorderBrush="#FF003049"
-                Height="80"
-                Width="64"
                 Margin="8">
                 <StackPanel>
                     <Image
+                        Stretch="Uniform"
                         Source="{Binding Path=Cartel}"
                         Margin="8"></Image>
                     <TextBlock
                         Text="{Binding Path=Titulo}"
-                        Margin="8"></TextBlock>
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="#FF003049"
+                        HorizontalAlignment="Center"
+                        Margin="3,8"></TextBlock>
                 </StackPanel>
             </Border>
 
@@ -69,7 +73,7 @@
             <Setter
                 Property="Foreground"
                 Value="#003049"></Setter>
-        
+
             <Setter
                 Property="FontSize"
                 Value="14"></Setter>
@@ -119,7 +123,10 @@
                 Value="14"></Setter>
             <Setter
                 Property="Margin"
-                Value="4"></Setter>
+                Value="8"></Setter>
+            <Setter
+                Property="Width"
+                Value="140"></Setter>
 
         </Style>
 
@@ -142,11 +149,15 @@
         <Style
             TargetType="{x:Type TextBox}">
             <Setter
-                Property="Width"
-                Value="280"></Setter>
+                Property="Padding"
+                Value="4"></Setter>
             <Setter
                 Property="Margin"
-                Value="4"></Setter>
+                Value="0,4,0,0"></Setter>
+
+            <Setter
+                Property="VerticalAlignment"
+                Value="Top"></Setter>
             <Setter
                 Property="BorderBrush"
                 Value="#F77F00"></Setter>
@@ -175,16 +186,19 @@
             </Style.Triggers>
         </Style>
 
-        <!-- StackPanel generico-->
+        
+
+
+        <!-- DockPanel generico-->
         <Style
-            TargetType="{x:Type StackPanel}">
+            TargetType="{x:Type DockPanel}">
 
             <Setter
-                Property="HorizontalAlignment"
-                Value="Center"></Setter>
-            <Setter
                 Property="VerticalAlignment"
-                Value="Center"></Setter>
+                Value="Stretch"></Setter>
+            <Setter
+                Property="HorizontalAlignment"
+                Value="Stretch"></Setter>
 
         </Style>
 
@@ -203,10 +217,12 @@
                         Background="#EAE2B7"
                         Orientation="Horizontal">
                         <TextBlock
-                            FontSize="16"
+                            Margin="30,6,6,6"
+                            FontSize="18"
                             FontWeight="Bold"
                             Text="Jugar"
-                            Foreground="#003049" />
+                            Foreground="#003049"
+                            Width="75" />
                     </StackPanel>
                 </TabItem.Header>
                 <!--Contenido Vista Juego-->
@@ -220,8 +236,10 @@
                             Margin="5"
                             Width="15"
                             Source="assets/arrow_icon.png"></Image>
-                        <Label>
-                            <TextBlock>
+                        <Label
+                            Width="58">
+                            <TextBlock
+                                Width="33">
                                     <Run
                                     Text="1"></Run>
                                     <Run
@@ -261,90 +279,148 @@
                             <RowDefinition
                                 MinHeight="140"></RowDefinition>
                             <RowDefinition
-                                Height="80"></RowDefinition>
+                                MinHeight="80"></RowDefinition>
                             <RowDefinition
-                                Height="80"></RowDefinition>
-                            <RowDefinition
-                                Height="80">
+                                MinHeight="80">
                             </RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="0"
-                            Orientation="Horizontal">
-                            <StackPanel>
-                                <Label>Puntuación</Label>
-                                <Border
-                                    Width="160"
-                                    Height="110">
-                                    <StackPanel
-                                        HorizontalAlignment="Left">
-                                        <TextBlock
-                                            FontSize="16">
-                                            <Run>Aciertos: </Run>
-                                            <Run
-                                                x:Name="aciertosRun"> </Run>
-                                        </TextBlock>
-                                        <TextBlock
-                                            FontSize="16">
-                                                <Run>Fallos: </Run>
-                                                <Run
-                                                x:Name="fallosRun"> </Run>
-                                        </TextBlock>
-                                        <TextBlock
-                                            FontSize="16">
-                                                <Run>Puntuación:</Run>
-                                                <Run
-                                                x:Name="puntuacionRun"></Run>
-                                        </TextBlock>
-                                    </StackPanel>
+                            Margin="8">
+                            <DockPanel>
+                                <Label
+                                    DockPanel.Dock="Top">Puntuación</Label>
+                                <Border>
+                                    <Viewbox>
+                                        <StackPanel
+                                            HorizontalAlignment="Left">
+                                            <DockPanel>
+                                                <TextBlock
+                                                    HorizontalAlignment="Left"
+                                                    Width="60"
+                                                    Height="20"
+                                                    Margin="4,4,4,4"
+                                                    FontSize="16">
+                                                Aciertos:
+                                                </TextBlock>
+                                                <TextBlock
+                                                    x:Name="aciertosTextBlock"
+                                                    Width="30"
+                                                    MinHeight="20"
+                                                    FontSize="15">4
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock
+                                                    HorizontalAlignment="Left"
+                                                    Width="60"
+                                                    Height="20"
+                                                    Margin="4,4,4,4"
+                                                    FontSize="16">
+                                                Fallos:
+                                                </TextBlock>
+                                                <TextBlock
+                                                    x:Name="fallosTextBlock"
+                                                    Width="30"
+                                                    MinHeight="20"
+                                                    FontSize="15">4
+                                                </TextBlock>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock
+                                                    HorizontalAlignment="Left"
+                                                    Width="120"
+                                                    Height="30"
+                                                    Margin="4,4,4,4"
+                                                    FontSize="20">
+                                                Puntuación:
+                                                </TextBlock>
+                                                <TextBlock
+                                                    Foreground="#003049"
+                                                    x:Name="puntuacionTextBlock"
+                                                    Width="30"
+                                                    MinHeight="20"
+                                                    FontSize="28">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect
+                                                            BlurRadius="1"
+                                                            Color="#F77F00"
+                                                            Direction="0"
+                                                            ShadowDepth="1" />
+                                                    </TextBlock.Effect>4
+                                                </TextBlock>
+                                            </DockPanel>
+                                        </StackPanel>
+                                    </Viewbox>
                                 </Border>
-                            </StackPanel>
+                            </DockPanel>
+                            <Viewbox>
                             <StackPanel
                                 Margin="35,35,15,15"
                                 Grid.Column="2"
                                 Grid.Row="0">
                                 <Button
                                     x:Name="nuevaPartidaButton"
-                                    Click="NuevaPartidaButton_Click">Nueva Partida</Button>
+                                    Click="NuevaPartidaButton_Click"
+                                    Template="{DynamicResource ButtonControlTemplate1}">Nueva Partida</Button>
                                 <Button
+                                    Template="{DynamicResource ButtonControlTemplate1}"
                                     x:Name="finPartidaButton"
                                     Click="FinPartidaButton_Click">Finalizar Partida</Button>
                             </StackPanel>
-                        </StackPanel>
+                            </Viewbox>
+                        </DockPanel>
 
-                        <StackPanel
+                        <DockPanel
                             Grid.Row="1"
                             HorizontalAlignment="Left"
-                            Margin="10,0,0,0">
+                            Margin="10,0,0,0"
+                            MaxWidth="600">
                             <Label
+                                DockPanel.Dock="Top"
                                 Height="29">Título de la película</Label>
-                            <StackPanel
-                                Orientation="Horizontal"
-                                Height="42">
-                                <TextBox
-                                    Width="260"
-                                    Height="30"></TextBox>
-                                <Button
-                                    Width="100"
-                                    x:Name="comprobarRespuestaButton">Validar</Button>
-                            </StackPanel>
-                        </StackPanel>
+                            <DockPanel>
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    DockPanel.Dock="Bottom">
+                                    <CheckBox
+                                        Margin="8"
+                                        Foreground="#003049"
+                                        FontSize="14"
+                                        FontWeight="Bold"
+                                        Background="#FFF8F6E5"
+                                        BorderBrush="#F77F00"
+                                        x:Name="verPistaCheckBox">Ver pista</CheckBox>
+                                    <Button
+                                        
+                                        Foreground="#FFFFB05D"
+                                        Margin="120,4,20,4"
+                                        VerticalAlignment="Top"
+                                        Height="30"
+                                        Template="{DynamicResource ButtonControlTemplate1}"
+                                        Width="100"
+                                        x:Name="comprobarRespuestaButton">Validar</Button>
+                                </StackPanel>
+                                <Viewbox>
+                                    <TextBox
+                                        MinHeight="30"
+                                        MinWidth="280">
+                                    </TextBox>
+                                </Viewbox>
+                                
+                            </DockPanel>
+                        </DockPanel>
                         <StackPanel
                             Margin="20,0,0,0"
                             Grid.Row="2"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center">
-                            <CheckBox
-                                Foreground="#003049"
-                                FontSize="14"
-                                FontWeight="Bold"
-                                Background="#FFF8F6E5"
-                                BorderBrush="#F77F00"
-                                x:Name="verPistaCheckBox">Ver pista</CheckBox>
+                            
                             <TextBlock
                                 x:Name="pistaTextBlock"
-                                Text="{Binding Path=PeliculaSeleccionada.Pista}" Margin="4,4,-170,4"></TextBlock>
+                                Text="{Binding Path=PeliculaSeleccionada.Pista}"
+                                Margin="4,4,-170,4"></TextBlock>
                         </StackPanel>
                         <StackPanel
                             Grid.Row="3">
@@ -357,7 +433,7 @@
 
                     <Image
                         x:Name="cartelImage"
-                        Stretch="Fill"
+                        Stretch="Uniform"
                         DockPanel.Dock="Left"
                         Margin="10"
                         Source="{Binding Path=PeliculaSeleccionada.Cartel}"></Image>
@@ -374,20 +450,20 @@
                         Background="#EAE2B7"
                         Orientation="Horizontal">
                         <TextBlock
-                            FontSize="16"
+                            Margin="30,6,6,6"
+                            FontSize="18"
                             FontWeight="Bold"
                             Text="Gestionar"
-                            Foreground="#003049" />
+                            Foreground="#003049"
+                            Width="109" />
                     </StackPanel>
                 </TabItem.Header>
 
-                <!--Contenido Vista Gestión-->
+
+
+                <!-- Contenido Vista Gestión -->
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="21.333"></ColumnDefinition>
-                        <ColumnDefinition
-                            Width="8" />
                         <ColumnDefinition
                             Width="547*" />
                         <ColumnDefinition
@@ -401,103 +477,107 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-
-                    <StackPanel
+                    <Viewbox
                         Grid.Row="0"
-                        Grid.Column="3"
-                        Margin="27.334,13,26.666,12.667">
+                        Grid.Column="1">
+                    <StackPanel
+                        >
                         <Button
+                            Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="cargarJsonButton"
                             Click="CargarJsonButton_Click">Cargar de JSON</Button>
                         <Button
+                            Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="guardarJsonButton"
                             Click="GuardarJsonButton_Click">Guardar en JSON</Button>
                         <Button
+                            Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="añadirPeliculaButton"
                             Click="AñadirPeliculaButton_Click">Añadir película</Button>
                         <Button
+                            Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="editarPeliculaButton"
                             Click="EditarPeliculaButton_Click">Editar película</Button>
                         <Button
+                            Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="eliminarPeliculaButton"
                             Click="EliminarPeliculaButton_Click">Eliminar película</Button>
                     </StackPanel>
-                    <StackPanel
-                        HorizontalAlignment="Left"
+                    </Viewbox>
+                    <DockPanel
+                        Margin="20,1,8,8"
                         Grid.Row="1"
-                        Orientation="Horizontal"
-                        Grid.ColumnSpan="2"
-                        Margin="7.667,8.333,0,8.667"
-                        Width="538"
-                        Grid.Column="1">
-                        <TextBlock>Título de la película</TextBlock>
+                        Grid.Column="0">
+                        <TextBlock
+                            DockPanel.Dock="Left">Título de la película</TextBlock>
                         <TextBox
-                            Text="{Binding Path=PeliculaSeleccionada.Titulo}"
-                            Margin="21,1,1,1"
+                            Text="{Binding Path=PeliculaFormulario.Titulo}"
                             x:Name="tituloTextBox"
-                            Width="362"></TextBox>
-                    </StackPanel>
-                    <StackPanel
-                        HorizontalAlignment="Left"
+                        ></TextBox>
+                    </DockPanel>
+                    <DockPanel
+                        Margin="20,1,8,8"
                         Grid.Row="2"
-                        Orientation="Horizontal"
-                        Grid.ColumnSpan="2"
-                        Margin="7.667,8.333,0,8.667"
-                        Width="538"
-                        Grid.Column="1">
-                        <TextBlock>Pista de la película</TextBlock>
+                        Grid.Column="0">
+                        <TextBlock
+                            DockPanel.Dock="Left">Pista de la película</TextBlock>
                         <TextBox
-                            Text="{Binding Path=PeliculaSeleccionada.Pista, Mode=TwoWay}"
-                            Margin="27,1,1,1"
+                            Text="{Binding Path=PeliculaFormulario.Pista, Mode=TwoWay}"
                             x:Name="pistaTextBox"
-                            Width="363" />
-                    </StackPanel>
-                    <StackPanel
-                        HorizontalAlignment="Left"
+                            TextChanged="pistaTextBox_TextChanged" />
+                    </DockPanel>
+                    <DockPanel
+                        Margin="20,1,8,8"
                         Grid.Row="3"
-                        Orientation="Horizontal"
-                        Grid.ColumnSpan="2"
-                        Margin="7.667,8.333,0,8.667"
-                        Width="538"
-                        Grid.Column="1">
+                        Grid.Column="0">
                         <TextBlock>Imagen de la película</TextBlock>
                         <TextBox
-                            Text="{Binding Path=PeliculaSeleccionada.Cartel, Mode=TwoWay}"
-                            Margin="10,1,1,1"
+                            Text="{Binding Path=PeliculaFormulario.Cartel, Mode=TwoWay}"
                             x:Name="imagenTextBox"
-                            Width="361"></TextBox>
-                    </StackPanel>
+                            TextChanged="imagenTextBox_TextChanged"></TextBox>
+                    </DockPanel>
                     <Button
+                        Template="{DynamicResource ButtonControlTemplate1}"
                         Width="100"
+                        FontSize="12"
+                        Margin="8,0,0,8"
+                        Height="26"
                         HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
                         x:Name="selectImagenButton"
                         Grid.Row="3"
                         Grid.Column="3"
                         Click="SelectImagenButton_Click"
-                        Margin="8.334,8.333,0,7.667">Examinar
+                        >Examinar
                     </Button>
                     <StackPanel
-                        Margin="61.667,7.333,15.667,6.667"
                         Grid.Row="4"
-                        Grid.Column="2"
+                        Grid.Column="0"
                         Orientation="Horizontal"
                         Width="470">
                         <TextBlock
-                            Margin="10,5,0,0"
+                            Margin="10,8,0,0"
                             Width="125">Nivel de dificultad</TextBlock>
                         <ComboBox
                             Template="{DynamicResource ComboBoxControlTemplate}"
                             ItemsSource="{Binding Path=ListaNiveles}"
-                            SelectedItem="{Binding Path=PeliculaSeleccionada.Nivel, UpdateSourceTrigger=Explicit}"
+                            SelectedItem="{Binding Path=PeliculaFormulario.Nivel, UpdateSourceTrigger=Explicit}"
                             x:Name="dificultadComboBox"
-                            Margin="4,4,40,4"></ComboBox>
-                        <TextBlock>Género</TextBlock>
+                            Margin="4,4,40,4"
+                            Height="30"
+                            Width="80"></ComboBox>
+                        <TextBlock
+                            Margin="10,8,0,0"
+                            Width="55">Género</TextBlock>
                         <ComboBox
                             Template="{DynamicResource ComboBoxControlTemplate}"
                             ItemsSource="{Binding Path=ListaGeneros}"
-                            SelectedItem="{Binding Path=PeliculaSeleccionada.Genero, UpdateSourceTrigger=Explicit}"
+                            SelectedItem="{Binding Path=PeliculaFormulario.Genero, UpdateSourceTrigger=Explicit}"
                             x:Name="generoComboBox"
-                            Margin="4"></ComboBox>
+                            Margin="4"
+                            Height="30"
+                            Width="125"
+                            SelectionChanged="generoComboBox_SelectionChanged"></ComboBox>
                     </StackPanel>
                     <ListBox
                         BorderBrush="#F77F00"
@@ -505,13 +585,12 @@
                         ItemTemplate="{StaticResource plantillaPelis}"
                         ItemsSource="{Binding Path=ListaPeliculasCargadas}"
                         SelectedItem="{Binding Path=PeliculaSeleccionada }"
-                        Margin="8,8,7.666,7.667"
-                        Grid.ColumnSpan="3"
+                        Margin="8"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel></WrapPanel>
+                                <UniformGrid></UniformGrid>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>
