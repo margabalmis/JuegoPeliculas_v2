@@ -331,9 +331,10 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel
+                            Margin="20,0,0,0"
                             Grid.Row="2"
                             HorizontalAlignment="Left"
-                            Margin="20">
+                            VerticalAlignment="Center">
                             <CheckBox
                                 Foreground="#003049"
                                 FontSize="14"
@@ -343,7 +344,7 @@
                                 x:Name="verPistaCheckBox">Ver pista</CheckBox>
                             <TextBlock
                                 x:Name="pistaTextBlock"
-                                Text="{Binding Path=PeliculaSeleccionada.Pista}"></TextBlock>
+                                Text="{Binding Path=PeliculaSeleccionada.Pista}" Margin="4,4,-170,4"></TextBlock>
                         </StackPanel>
                         <StackPanel
                             Grid.Row="3">
@@ -431,7 +432,7 @@
                         Grid.Column="1">
                         <TextBlock>Título de la película</TextBlock>
                         <TextBox
-                            Text="{Binding Path=PeliculaSeleccionada.Titulo, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+                            Text="{Binding Path=PeliculaSeleccionada.Titulo}"
                             Margin="21,1,1,1"
                             x:Name="tituloTextBox"
                             Width="362"></TextBox>

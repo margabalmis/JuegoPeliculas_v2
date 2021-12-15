@@ -76,6 +76,14 @@ namespace JuegoPeliculas
             set { SetProperty(ref peliculaSeleccionada, value); }
         }
 
+        //Pélicula seleccionada formulario
+        private Pelicula peliculaFormulario;
+        public Pelicula PeliculaFormulario
+        {
+            get { return peliculaFormulario; }
+            set { SetProperty(ref peliculaFormulario, value); }
+        }
+
         public void CargarJson()
         {
             string textoJson;
