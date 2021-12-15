@@ -138,10 +138,10 @@ namespace JuegoPeliculas
             if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
             {
                 if (PeliculaSeleccionada.Titulo != null &&
-                    PeliculaSeleccionada.Pista != null &&
-                        PeliculaSeleccionada.Cartel != null &&
-                            PeliculaSeleccionada.Nivel != null &&
-                               PeliculaSeleccionada.Genero != null)
+                        PeliculaSeleccionada.Pista != null &&
+                            PeliculaSeleccionada.Cartel != null &&
+                                PeliculaSeleccionada.Nivel != null &&
+                                    PeliculaSeleccionada.Genero != null)
                 {
 
                     ListaPeliculasCargadas.Add(PeliculaSeleccionada);
