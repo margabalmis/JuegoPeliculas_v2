@@ -19,18 +19,29 @@ namespace JuegoPeliculas
 
         public String SubirImagen(string rutaImagen) {
 
-            //Obtenemos el cliente del contenedor
-            var clienteBlobService = new BlobServiceClient(cadenaConexion);
-            var clienteContenedor = clienteBlobService.GetBlobContainerClient(nombreContenedorBlobs);
+            string urlImagen = null;
+            try
+            {
+                //Obtenemos el cliente del contenedor
+                var clienteBlobService = new BlobServiceClient(cadenaConexion);
+                var clienteContenedor = clienteBlobService.GetBlobContainerClient(nombreContenedorBlobs);
 
-            //Leemos la imagen y la subimos al contenedor
-            Stream streamImagen = File.OpenRead(rutaImagen);
-            string nombreImagen = Path.GetFileName(rutaImagen);
-            clienteContenedor.UploadBlob(nombreImagen, streamImagen);
+                //Leemos la imagen y la subimos al contenedor
+                Stream streamImagen = File.OpenRead(rutaImagen);
+                string nombreImagen = Path.GetFileName(rutaImagen);
+                clienteContenedor.UploadBlob(nombreImagen, streamImagen);
 
-            //Una vez subida, obtenemos la URL para referenciarla
-            var clienteBlobImagen = clienteContenedor.GetBlobClient(nombreImagen);
-            string urlImagen = clienteBlobImagen.Uri.AbsoluteUri;
+                //Una vez subida, obtenemos la URL para referenciarla
+                var clienteBlobImagen = clienteContenedor.GetBlobClient(nombreImagen);
+                urlImagen = clienteBlobImagen.Uri.AbsoluteUri;
+
+                
+
+            }
+            catch(Exception e)
+            {
+                //TODO
+            }
 
             return urlImagen;
 

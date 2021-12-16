@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace JuegoPeliculas
 {
-	class FileDialog : Window
+    class FileDialog : Window
 	{
 		string textoJsonCargar;
         readonly string textoJsonGuardar;

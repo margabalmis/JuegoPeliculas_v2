@@ -2,6 +2,8 @@
 
 class Pelicula : ObservableObject
 {
+    public Pelicula() { 
+    }
     private string titulo;
     public string Titulo
     {

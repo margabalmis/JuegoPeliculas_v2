@@ -16,10 +16,11 @@ namespace JuegoPeliculas
 
         public MainWindowVM()
         {
-            ListaGeneros = new ObservableCollection<string> { "Terror", "Comedia", "Drama","Acción","Ciencia Ficción"};
-            ListaNiveles = new ObservableCollection<string> { "Fácil", "Normal", "Difícil"};
+            ListaGeneros = new ObservableCollection<string> { "","Terror", "Comedia", "Drama","Acción","Ciencia Ficción"};
+            ListaNiveles = new ObservableCollection<string> { "", "Fácil", "Normal", "Difícil"};
             NumPelicula = 1;
         }
+
 
         //Número de película actual
         private int numPelicula;
@@ -50,27 +51,7 @@ namespace JuegoPeliculas
         //Lista de géneros de péliculas
         private ObservableCollection<string> listaGeneros;
 
-        internal void GuardarCambios()
-        {
-            if (PeliculaFormulario != null)
-            {
-                if (!PeliculaFormulario.Titulo.Equals("") &&
-                        PeliculaFormulario.Pista != null &&
-                            PeliculaFormulario.Cartel != null &&
-                                PeliculaFormulario.Nivel != null &&
-                                    PeliculaFormulario.Genero != null)
-                {
-
-                    PeliculaSeleccionada = PeliculaFormulario;
-
-                }
-                else
-                {
-                    //TODO
-                }
-
-            }
-        }
+        
 
         public ObservableCollection<string> ListaGeneros
         {
@@ -104,8 +85,50 @@ namespace JuegoPeliculas
         }
         internal void EditarPelicula()
         {
+            Pelicula peliForm = new Pelicula();
 
-            PeliculaFormulario = PeliculaSeleccionada;
+            peliForm.Titulo = PeliculaSeleccionada.Titulo;
+            peliForm.Cartel = PeliculaSeleccionada.Cartel;
+            peliForm.Genero = PeliculaSeleccionada.Genero;
+            peliForm.Pista = PeliculaSeleccionada.Pista;
+            peliForm.Nivel = PeliculaSeleccionada.Nivel;
+
+            PeliculaFormulario = peliForm;
+        }
+        public void GuardarCambios()
+        {
+            if (PeliculaFormulario != null)
+            {
+                if (!PeliculaFormulario.Titulo.Equals("") &&
+                        !PeliculaFormulario.Pista.Equals("") &&
+                            !PeliculaFormulario.Cartel.Equals(""))
+                {
+
+                    PeliculaSeleccionada.Titulo = PeliculaFormulario.Titulo;
+                    PeliculaSeleccionada.Cartel = PeliculaFormulario.Cartel;
+                    PeliculaSeleccionada.Genero = PeliculaFormulario.Genero;
+                    PeliculaSeleccionada.Nivel = PeliculaFormulario.Nivel;
+                    PeliculaSeleccionada.Pista = PeliculaFormulario.Pista;
+
+
+                }
+                else
+                {
+                    //TODO
+                }
+
+            }
+            else
+            { 
+                //TODO
+            
+            }
+            PeliculaFormulario.Titulo = "";
+            PeliculaFormulario.Cartel = "";
+            PeliculaFormulario.Genero = "";
+            PeliculaFormulario.Nivel = "";
+            PeliculaFormulario.Pista = "";
+
 
         }
 
@@ -138,12 +161,13 @@ namespace JuegoPeliculas
 
         internal void SeleccionarImagen()
         {
+            Pelicula nuevaPeli = new Pelicula(); 
             string ruta;
             string url;
 
             ruta = dialogo.OpenFileRuta();
             url = azure.SubirImagen(ruta);
-
+            nuevaPeli.Cartel = url;
         }
 
         internal void NuevaPartida()
@@ -164,18 +188,18 @@ namespace JuegoPeliculas
 
         internal void AñadirPelicula()
         {
-            if (PeliculaSeleccionada != null) 
+            if (PeliculaFormulario != null) 
             {
                 if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
                 {
-                    if (PeliculaSeleccionada.Titulo != null &&
-                            PeliculaSeleccionada.Pista != null &&
-                                PeliculaSeleccionada.Cartel != null &&
-                                    PeliculaSeleccionada.Nivel != null &&
-                                        PeliculaSeleccionada.Genero != null)
+                    if (PeliculaFormulario.Titulo != null &&
+                            PeliculaFormulario.Pista != null &&
+                                PeliculaFormulario.Cartel != null &&
+                                    PeliculaFormulario.Nivel != null &&
+                                        PeliculaFormulario.Genero != null)
                     {
 
-                        ListaPeliculasCargadas.Add(PeliculaSeleccionada);
+                        ListaPeliculasCargadas.Add(PeliculaFormulario);
 
                     }
                     else
