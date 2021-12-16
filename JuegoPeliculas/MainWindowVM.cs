@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace JuegoPeliculas
 {
@@ -16,6 +17,7 @@ namespace JuegoPeliculas
 
         public MainWindowVM()
         {
+            PeliculaFormulario = new Pelicula();
             ListaGeneros = new ObservableCollection<string> { "","Terror", "Comedia", "Drama","Acción","Ciencia Ficción"};
             ListaNiveles = new ObservableCollection<string> { "", "Fácil", "Normal", "Difícil"};
             NumPelicula = 1;
@@ -161,13 +163,13 @@ namespace JuegoPeliculas
 
         internal void SeleccionarImagen()
         {
-            Pelicula nuevaPeli = new Pelicula(); 
+             
             string ruta;
             string url;
 
             ruta = dialogo.OpenFileRuta();
             url = azure.SubirImagen(ruta);
-            nuevaPeli.Cartel = url;
+            PeliculaFormulario.Cartel = url;
         }
 
         internal void NuevaPartida()
@@ -182,24 +184,27 @@ namespace JuegoPeliculas
 
         internal void GuardarJson()
         {
-
-            dialogo.SaveFile();
+            string ruta = dialogo.SaveFile();
+            json.Exportar(ListaPeliculasCargadas, ruta);
         }
 
         internal void AñadirPelicula()
         {
-            if (PeliculaFormulario != null) 
+            if (PeliculaFormulario != null && ListaPeliculasCargadas !=null) 
             {
                 if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
                 {
-                    if (PeliculaFormulario.Titulo != null &&
-                            PeliculaFormulario.Pista != null &&
-                                PeliculaFormulario.Cartel != null &&
-                                    PeliculaFormulario.Nivel != null &&
-                                        PeliculaFormulario.Genero != null)
+                    if (!PeliculaFormulario.Titulo.Equals("") &&
+                            !PeliculaFormulario.Pista.Equals("") &&
+                                !PeliculaFormulario.Cartel.Equals(""))
                     {
-
-                        ListaPeliculasCargadas.Add(PeliculaFormulario);
+                        Pelicula peliAñadir = new Pelicula();
+                        peliAñadir.Titulo = PeliculaFormulario.Titulo;
+                        peliAñadir.Cartel = PeliculaFormulario.Cartel;
+                        peliAñadir.Genero = PeliculaFormulario.Genero;
+                        peliAñadir.Nivel = PeliculaFormulario.Nivel;
+                        peliAñadir.Pista = PeliculaFormulario.Pista;
+                        ListaPeliculasCargadas.Add(peliAñadir);
 
                     }
                     else
@@ -213,6 +218,11 @@ namespace JuegoPeliculas
                 }
 
             }
+            PeliculaFormulario.Titulo = "";
+            PeliculaFormulario.Cartel = "";
+            PeliculaFormulario.Genero = "";
+            PeliculaFormulario.Nivel = "";
+            PeliculaFormulario.Pista = "";
 
 
         }

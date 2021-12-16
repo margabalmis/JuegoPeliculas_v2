@@ -10,6 +10,7 @@ namespace JuegoPeliculas
 
             string pelisJson = JsonConvert.SerializeObject(listaPelis);
             File.WriteAllText(ruta, pelisJson);
+
         }
         public ObservableCollection<Pelicula> Importar(string textoJson)
         {

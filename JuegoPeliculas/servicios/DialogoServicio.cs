@@ -44,11 +44,15 @@ namespace JuegoPeliculas
 			}
 			return textoRuta;
 		}
-		public void SaveFile()
+		public string SaveFile()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			string ruta = "";
+
 			if (saveFileDialog.ShowDialog() == true)
-				File.WriteAllText(saveFileDialog.FileName, textoJsonGuardar);
+				ruta = saveFileDialog.FileName;
+
+			return ruta;
 		}
 	}
 }
