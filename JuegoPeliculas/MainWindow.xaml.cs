@@ -57,19 +57,9 @@ namespace JuegoPeliculas
             vm.FinPartida();
         }
 
-        private void pistaTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void GuardarCambiosButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void imagenTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void generoComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            vm.GuardarCambios();
         }
     }
 }

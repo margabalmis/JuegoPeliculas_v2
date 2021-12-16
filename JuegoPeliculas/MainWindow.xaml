@@ -373,6 +373,7 @@
                         </DockPanel>
 
                         <DockPanel
+                            LastChildFill="False"
                             Grid.Row="1"
                             HorizontalAlignment="Left"
                             Margin="10,0,0,0"
@@ -380,7 +381,11 @@
                             <Label
                                 DockPanel.Dock="Top"
                                 Height="29">Título de la película</Label>
-                            <DockPanel>
+                            <StackPanel>
+                                <TextBox
+                                        Width="330"
+                                        Height="25">
+                                </TextBox>
                                 <StackPanel
                                     Orientation="Horizontal"
                                     DockPanel.Dock="Bottom">
@@ -402,14 +407,8 @@
                                         Width="100"
                                         x:Name="comprobarRespuestaButton">Validar</Button>
                                 </StackPanel>
-                                <Viewbox>
-                                    <TextBox
-                                        MinHeight="30"
-                                        MinWidth="280">
-                                    </TextBox>
-                                </Viewbox>
-                                
-                            </DockPanel>
+
+                            </StackPanel>
                         </DockPanel>
                         <StackPanel
                             Margin="20,0,0,0"
@@ -480,8 +479,7 @@
                     <Viewbox
                         Grid.Row="0"
                         Grid.Column="1">
-                    <StackPanel
-                        >
+                    <StackPanel>
                         <Button
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="cargarJsonButton"
@@ -498,7 +496,11 @@
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="editarPeliculaButton"
                             Click="EditarPeliculaButton_Click">Editar película</Button>
-                        <Button
+                            <Button
+                            Template="{DynamicResource ButtonControlTemplate1}"
+                            x:Name="guardarCambiosButton"
+                            Click="GuardarCambiosButton_Click">Guardar Cambios</Button>
+                         <Button
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="eliminarPeliculaButton"
                             Click="EliminarPeliculaButton_Click">Eliminar película</Button>
@@ -523,8 +525,7 @@
                             DockPanel.Dock="Left">Pista de la película</TextBlock>
                         <TextBox
                             Text="{Binding Path=PeliculaFormulario.Pista, Mode=TwoWay}"
-                            x:Name="pistaTextBox"
-                            TextChanged="pistaTextBox_TextChanged" />
+                            x:Name="pistaTextBox" />
                     </DockPanel>
                     <DockPanel
                         Margin="20,1,8,8"
@@ -534,7 +535,7 @@
                         <TextBox
                             Text="{Binding Path=PeliculaFormulario.Cartel, Mode=TwoWay}"
                             x:Name="imagenTextBox"
-                            TextChanged="imagenTextBox_TextChanged"></TextBox>
+                            ></TextBox>
                     </DockPanel>
                     <Button
                         Template="{DynamicResource ButtonControlTemplate1}"
@@ -547,7 +548,7 @@
                         x:Name="selectImagenButton"
                         Grid.Row="3"
                         Grid.Column="3"
-                        Click="SelectImagenButton_Click"
+                        
                         >Examinar
                     </Button>
                     <StackPanel
@@ -577,7 +578,7 @@
                             Margin="4"
                             Height="30"
                             Width="125"
-                            SelectionChanged="generoComboBox_SelectionChanged"></ComboBox>
+                            ></ComboBox>
                     </StackPanel>
                     <ListBox
                         BorderBrush="#F77F00"

@@ -49,6 +49,29 @@ namespace JuegoPeliculas
 
         //Lista de géneros de péliculas
         private ObservableCollection<string> listaGeneros;
+
+        internal void GuardarCambios()
+        {
+            if (PeliculaFormulario != null)
+            {
+                if (!PeliculaFormulario.Titulo.Equals("") &&
+                        PeliculaFormulario.Pista != null &&
+                            PeliculaFormulario.Cartel != null &&
+                                PeliculaFormulario.Nivel != null &&
+                                    PeliculaFormulario.Genero != null)
+                {
+
+                    PeliculaSeleccionada = PeliculaFormulario;
+
+                }
+                else
+                {
+                    //TODO
+                }
+
+            }
+        }
+
         public ObservableCollection<string> ListaGeneros
         {
             get { return listaGeneros; }
@@ -81,21 +104,9 @@ namespace JuegoPeliculas
         }
         internal void EditarPelicula()
         {
+
             PeliculaFormulario = PeliculaSeleccionada;
-            if (PeliculaFormulario.Titulo != null &&
-                        PeliculaFormulario.Pista != null &&
-                            PeliculaFormulario.Cartel != null &&
-                                PeliculaFormulario.Nivel != null &&
-                                    PeliculaFormulario.Genero != null)
-            {
 
-                PeliculaSeleccionada = PeliculaFormulario;
-
-            }
-            else
-            { 
-                //TODO
-            }
         }
 
         public void CargarJson()
@@ -153,9 +164,8 @@ namespace JuegoPeliculas
 
         internal void AñadirPelicula()
         {
-            try
+            if (PeliculaSeleccionada != null) 
             {
-
                 if (!ListaPeliculasCargadas.Contains(PeliculaSeleccionada))
                 {
                     if (PeliculaSeleccionada.Titulo != null &&
@@ -178,15 +188,11 @@ namespace JuegoPeliculas
                     //TODO
                 }
 
+            }
 
-            }
-            catch (NullReferenceException)
-            { 
-                
-            }
-            
 
         }
+
 
         internal void EliminarPelicula()
         {
