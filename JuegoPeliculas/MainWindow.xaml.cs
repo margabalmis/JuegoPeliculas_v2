@@ -61,5 +61,14 @@ namespace JuegoPeliculas
         {
             vm.GuardarCambios();
         }
+
+        private void AvanzarPeli(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            vm.Avanzar();
+        }
+        private void RetrocederPeli(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            vm.Retroceder();
+        }
     }
 }

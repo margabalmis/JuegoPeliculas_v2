@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -174,7 +176,31 @@ namespace JuegoPeliculas
 
         internal void NuevaPartida()
         {
-            throw new NotImplementedException();
+            Random rd = new Random();
+            int totalPelis = listaPeliculasCargadas.Count;
+            ArrayList numerosPelisPardita = new ArrayList();
+            int num = rd.Next(5);
+
+            PeliculasSeleccionadasJuego = new Pelicula[5];
+
+
+            numerosPelisPardita.Add(num);
+            PeliculasSeleccionadasJuego[0] = ListaPeliculasCargadas[num];
+
+            for (int i = 0; i < NUM_PELIS_JUGAR -1; i++)
+            {
+                num = rd.Next(5);
+                while (numerosPelisPardita.Contains(num))
+                {
+                    num = rd.Next(5);
+
+                }
+                numerosPelisPardita.Add(num);
+                PeliculasSeleccionadasJuego[i+1] = ListaPeliculasCargadas[num];
+            }
+
+
+
         }
 
         internal void FinPartida()

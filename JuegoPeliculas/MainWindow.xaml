@@ -22,6 +22,11 @@
 
     <Window.Resources>
 
+        <!-- Conversor Imagen Opacidad -->
+        <local:ConversorDesenfoque
+            x:Key="conversorDesenfoque"></local:ConversorDesenfoque>
+        
+        
         <!--Plantilla Pelis ListBox -->
         <DataTemplate
             x:Key="plantillaPelis">
@@ -46,7 +51,11 @@
             </Border>
 
         </DataTemplate>
+        
+        
+       
 
+        
         <!-- Border generico-->
         <Style
             TargetType="{x:Type Border}">
@@ -128,6 +137,25 @@
                 Property="Width"
                 Value="140"></Setter>
 
+        </Style>
+
+        <!-- TextBlock generico-->
+        <Style
+            TargetType="TextBlock"
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+            x:Key="pistaPeli">
+            <Setter
+                Property="Visibility"
+                Value="Hidden"></Setter>
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding ElementName=verPistaCheckBox, Path=IsChecked}" Value="true">
+                    <Setter
+                        Property="Visibility"
+                        Value="Visible"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            
         </Style>
 
         <!--Label  genérico-->
@@ -234,9 +262,12 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
+                            MouseLeftButtonUp="RetrocederPeli"
+                            x:Name="flechaRetrocederImage"
                             Margin="5"
                             Width="15"
-                            Source="assets/arrow_icon.png"></Image>
+                            Source="assets/arrow_icon.png"
+                            RenderTransformOrigin="0.5,0.788"></Image>
                         <Label
                             Width="58">
                             <TextBlock
@@ -250,10 +281,12 @@
                             </TextBlock>
                         </Label>
                         <Image
+                            x:Name="flechaAvanzarImage"
                             Margin="5"
                             Width="15"
                             Source="assets/arrow_icon.png"
-                            RenderTransformOrigin="0.5,0.5">
+                            RenderTransformOrigin="0.5,0.788"
+                            MouseLeftButtonUp="AvanzarPeli">
                             <Image.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform
@@ -411,18 +444,16 @@
                             </StackPanel>
                         </DockPanel>
                         <StackPanel
-                            Margin="20,0,0,0"
+                            Margin="8,8,0,0"
                             Grid.Row="2"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center">
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top">
 
                             <TextBlock
+                                Style="{StaticResource pistaPeli}"
+                                VerticalAlignment="Top"
                                 x:Name="pistaTextBlock"
-                                Text="{Binding Path=PeliculaSeleccionada.Pista}"
-                                Margin="4,4,-170,4"></TextBlock>
-                        </StackPanel>
-                        <StackPanel
-                            Grid.Row="3">
+                                Text="{Binding Path=PeliculaSeleccionada.Pista}"></TextBlock>
                             <Image
                                 x:Name="generoImage"
                                 Source="{Binding Path=PeliculaSeleccionada.Genero}"></Image>
@@ -435,6 +466,7 @@
                         Stretch="Uniform"
                         DockPanel.Dock="Left"
                         Margin="10"
+                        Focusable="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorDesenfoque}}"
                         Source="{Binding Path=PeliculaSeleccionada.Cartel}"></Image>
                 </DockPanel>
 

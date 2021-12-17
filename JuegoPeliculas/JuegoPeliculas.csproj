@@ -134,6 +134,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ConversorDesenfoque.cs" />
     <Compile Include="MainWindowVM.cs" />
     <Compile Include="servicios\AzureBlobStorageServicio.cs" />
     <Compile Include="servicios\JsonServicio.cs" />
@@ -185,6 +186,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\arrow_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\sci_fi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\action.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\drama.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\comedy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\terror.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
