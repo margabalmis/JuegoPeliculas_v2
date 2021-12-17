@@ -22,11 +22,15 @@
 
     <Window.Resources>
 
-        <!-- Conversor Imagen Opacidad -->
+        <!-- Conversores -->
         <local:ConversorDesenfoque
             x:Key="conversorDesenfoque"></local:ConversorDesenfoque>
-        
-        
+        <local:ConversorGenero
+            x:Key="conversorGenero"></local:ConversorGenero>
+        <local:ConvertidorNivel
+            x:Key="conversorColorNivel"></local:ConvertidorNivel>
+
+
         <!--Plantilla Pelis ListBox -->
         <DataTemplate
             x:Key="plantillaPelis">
@@ -446,28 +450,34 @@
                         <StackPanel
                             Margin="8,8,0,0"
                             Grid.Row="2"
-                            HorizontalAlignment="Center"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Top">
 
                             <TextBlock
                                 Style="{StaticResource pistaPeli}"
-                                VerticalAlignment="Top"
+                                Margin="10"
                                 x:Name="pistaTextBlock"
                                 Text="{Binding Path=PeliculaSeleccionada.Pista}"></TextBlock>
                             <Image
+                                Width="40"
+                                Height="40"
                                 x:Name="generoImage"
-                                Source="{Binding Path=PeliculaSeleccionada.Genero}"></Image>
+                                Source="{Binding Path=PeliculaSeleccionada.Genero, Converter={StaticResource conversorGenero}}"></Image>
                         </StackPanel>
 
                     </Grid>
-
+                    
                     <Image
                         x:Name="cartelImage"
                         Stretch="Uniform"
                         DockPanel.Dock="Left"
                         Margin="10"
                         Focusable="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorDesenfoque}}"
-                        Source="{Binding Path=PeliculaSeleccionada.Cartel}"></Image>
+                        Source="{Binding Path=PeliculaSeleccionada.Cartel}">
+                        <Image.Effect>
+                            <DropShadowEffect Color="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorColorNivel}}"/>
+                        </Image.Effect>
+                    </Image>
                 </DockPanel>
 
 
@@ -563,7 +573,7 @@
                         <TextBlock
                             DockPanel.Dock="Left">Pista de la película</TextBlock>
                         <TextBox
-                            Text="{Binding Path=PeliculaFormulario.Pista, Mode=TwoWay}"
+                            Text="{Binding Path=PeliculaFormulario.Pista}"
                             x:Name="pistaTextBox" />
                     </DockPanel>
                     <DockPanel

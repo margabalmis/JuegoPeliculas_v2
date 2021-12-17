@@ -179,7 +179,7 @@ namespace JuegoPeliculas
             Random rd = new Random();
             int totalPelis = listaPeliculasCargadas.Count;
             ArrayList numerosPelisPardita = new ArrayList();
-            int num = rd.Next(5);
+            int num = rd.Next(totalPelis);
 
             PeliculasSeleccionadasJuego = new Pelicula[5];
 
@@ -189,10 +189,10 @@ namespace JuegoPeliculas
 
             for (int i = 0; i < NUM_PELIS_JUGAR -1; i++)
             {
-                num = rd.Next(5);
+                num = rd.Next(totalPelis);
                 while (numerosPelisPardita.Contains(num))
                 {
-                    num = rd.Next(5);
+                    num = rd.Next(totalPelis);
 
                 }
                 numerosPelisPardita.Add(num);
