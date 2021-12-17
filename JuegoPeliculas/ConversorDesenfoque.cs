@@ -16,13 +16,13 @@ namespace JuegoPeliculas
 
             switch (value) 
             {
-                case "Fácil": valor = 0.1;
+                case "Fácil": valor = 12;
                     break;
                 case "Normal":
-                    valor = 0.5;
+                    valor = 10;
                     break;
                 case "Difícil":
-                    valor = 0.8;
+                    valor = 8;
                     break;
             }
             return valor;

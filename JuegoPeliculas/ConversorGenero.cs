@@ -38,27 +38,7 @@ namespace JuegoPeliculas
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string genero = "";
-
-            switch ((string)value)
-            {
-                case @"assets\terror.png":
-                    genero = "Terror";
-                    break;
-                case @"assets\comedy.png":
-                    genero = "Comedia";
-                    break;
-                case @"assets\drama.png":
-                    genero = "Drama";
-                    break;
-                case @"assets\action.png":
-                    genero = @"Acción";
-                    break;
-                case @"assets\sci_fi.png":
-                    genero = "Ciencia Ficción";
-                    break;
-            }
-            return genero;
+            throw new NotImplementedException();
         }
     }
 }

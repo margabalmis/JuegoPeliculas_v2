@@ -55,9 +55,6 @@
             </Border>
 
         </DataTemplate>
-        
-        
-       
 
         
         <!-- Border generico-->
@@ -472,11 +469,11 @@
                         Stretch="Uniform"
                         DockPanel.Dock="Left"
                         Margin="10"
-                        Focusable="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorDesenfoque}}"
                         Source="{Binding Path=PeliculaSeleccionada.Cartel}">
                         <Image.Effect>
-                            <DropShadowEffect Color="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorColorNivel}}"/>
+                            <BlurEffect Radius="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorDesenfoque}}"></BlurEffect>
                         </Image.Effect>
+
                     </Image>
                 </DockPanel>
 

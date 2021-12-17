@@ -137,6 +137,7 @@
     <Compile Include="ConversorDesenfoque.cs" />
     <Compile Include="ConversorGenero.cs" />
     <Compile Include="ConvertidorNivel.cs" />
+    <Compile Include="Juego.cs" />
     <Compile Include="MainWindowVM.cs" />
     <Compile Include="servicios\AzureBlobStorageServicio.cs" />
     <Compile Include="servicios\JsonServicio.cs" />
