@@ -76,9 +76,8 @@ namespace JuegoPeliculas
             vm.ValidarTitulo();
         }
 
-        private void verPistaCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            vm.VerPistaSeleccionado();
-        }
+
+
+
     }
 }

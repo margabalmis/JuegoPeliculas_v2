@@ -12,20 +12,24 @@ namespace JuegoPeliculas
     {
         readonly int NUM_PELIS_JUGAR = 5;
 
-        readonly FileDialog dialogo = new FileDialog();
+        readonly Dialog dialogo = new Dialog();
         readonly JsonServicio json = new JsonServicio();
         readonly AzureBlobStorageServicio azure = new AzureBlobStorageServicio();
-
-
-
+        int totalPelis = 0;
+        Random rd = new Random();
+        ArrayList numerosPelisPardita;
 
         public MainWindowVM()
         {
+            NuevoJuego = new Juego();
             PeliculaFormulario = new Pelicula();
             ListaGeneros = new ObservableCollection<string> { "","Terror", "Comedia", "Drama","Acción","Ciencia Ficción"};
             ListaNiveles = new ObservableCollection<string> { "", "Fácil", "Normal", "Difícil"};
-            NumPelicula = 1;
+            NumPelicula = 0;
             VerPista = false;
+            DesbloquearGestion = true;
+            PeliAcertada = true;
+            NumPeliculasParaAcertar = 0;
         }
         private Juego nuevoJuego;
 
@@ -42,6 +46,14 @@ namespace JuegoPeliculas
         {
             get { return numPelicula; }
             set { SetProperty(ref numPelicula, value); }
+        }
+
+        //Número de películas para acertar
+        private int numPeliculasParaAcertar;
+        public int NumPeliculasParaAcertar
+        {
+            get { return numPeliculasParaAcertar; }
+            set { SetProperty(ref numPeliculasParaAcertar, value); }
         }
 
 
@@ -81,6 +93,15 @@ namespace JuegoPeliculas
             get { return listaNiveles; }
             set { SetProperty(ref listaNiveles, value); }
         }
+
+
+        private Boolean desbloquearGestion;
+
+        public Boolean DesbloquearGestion
+        {
+            get { return desbloquearGestion; }
+            set { SetProperty(ref desbloquearGestion, value); }
+        }
         private Boolean verPista;
 
         public Boolean VerPista
@@ -89,6 +110,13 @@ namespace JuegoPeliculas
             set { SetProperty(ref verPista, value); }
         }
 
+        private Boolean peliAcertada;
+
+        public Boolean PeliAcertada
+        {
+            get { return peliAcertada; }
+            set { SetProperty(ref peliAcertada, value); }
+        }
         //Pélicula seleccionada actualmente
         private Pelicula peliculaSeleccionada;
         public Pelicula PeliculaSeleccionada
@@ -107,13 +135,19 @@ namespace JuegoPeliculas
 
         internal void ValidarTitulo()
         {
-            if (!nuevoJuego.TituloParaValidar.Equals(""))
+
+        
+            if (nuevoJuego.TituloParaValidar != null)
             {
                 if (nuevoJuego.TituloParaValidar.ToLower()
                     == PeliculaSeleccionada.Titulo.ToLower())
                 {
+                    PeliAcertada = false;
                     nuevoJuego.Aciertos++;
                     nuevoJuego.Puntuacion += CalcularPuntuacionPeli();
+                    nuevoJuego.TituloParaValidar = "";
+
+
                 }
                 else
                 {
@@ -187,20 +221,50 @@ namespace JuegoPeliculas
 
         public void Avanzar()
         {
-            if (NumPelicula < NUM_PELIS_JUGAR)
+
+            if (PeliculasSeleccionadasJuego != null)
             {
-                NumPelicula++;
-                PeliculaSeleccionada = PeliculasSeleccionadasJuego[NumPelicula - 1];
+                VerPista = false;
+                PeliAcertada = true;
+                if (NumPelicula < NUM_PELIS_JUGAR)
+                {
+                    NumPelicula++;
+                    if (PeliculaSeleccionada != null)
+                    {
+                        if (PeliculasSeleccionadasJuego.Length == 0)
+                        {
+
+                        }
+                        else
+                        {
+                            PeliculaSeleccionada = PeliculasSeleccionadasJuego[NumPelicula - 1];
+                        }
+                    }
+
+                }
+
             }
+            
         }
 
         public void Retroceder()
         {
-            if (NumPelicula > 1)
+            if (PeliculasSeleccionadasJuego != null)
             {
-                NumPelicula--;
-                PeliculaSeleccionada = PeliculasSeleccionadasJuego[NumPelicula - 1];
+                VerPista = false;
+                PeliAcertada = true;
+                if (NumPelicula > 1)
+                {
+                    NumPelicula--;
+                    if (PeliculasSeleccionadasJuego != null)
+                    {
+                        PeliculaSeleccionada = PeliculasSeleccionadasJuego[NumPelicula - 1];
+                    }
+
+                }
+
             }
+            
         }
 
         internal void SeleccionarImagen()
@@ -216,24 +280,39 @@ namespace JuegoPeliculas
 
         internal void NuevaPartida()
         {
-
-            NuevoJuego = new Juego();
+            DesbloquearGestion = false;
+            VerPista = false;
+            
             NuevoJuego.Aciertos = 0;
             NuevoJuego.Fallos = 0;
             NuevoJuego.Puntuacion = 0;
 
-            Random rd = new Random();
-            int totalPelis = listaPeliculasCargadas.Count;
+            if (listaPeliculasCargadas != null)
+            {
+                totalPelis = listaPeliculasCargadas.Count;
+            }
 
             //Posiciones aleatorias de la lista carada en gestion
-            ArrayList numerosPelisPardita = new ArrayList();
+            numerosPelisPardita = new ArrayList();
             int num = rd.Next(totalPelis);
 
             PeliculasSeleccionadasJuego = new Pelicula[5];
 
             numerosPelisPardita.Add(num);
 
-            PeliculasSeleccionadasJuego[0] = ListaPeliculasCargadas[num];
+            if (ListaPeliculasCargadas != null)
+            {
+                PeliculasSeleccionadasJuego[0] = ListaPeliculasCargadas[num];
+                CargarPelis();
+            }
+
+        }
+
+        private void CargarPelis()
+        {
+            NumPelicula = 1;
+            NumPeliculasParaAcertar = PeliculasSeleccionadasJuego.Length;
+            int num = rd.Next(totalPelis);
 
             for (int i = 0; i < NUM_PELIS_JUGAR - 1; i++)
             {
@@ -243,16 +322,14 @@ namespace JuegoPeliculas
                     num = rd.Next(totalPelis);
                 }
                 numerosPelisPardita.Add(num);
-                PeliculasSeleccionadasJuego[i+1] = ListaPeliculasCargadas[num];
+                PeliculasSeleccionadasJuego[i + 1] = ListaPeliculasCargadas[num];
             }
             PeliculaSeleccionada = PeliculasSeleccionadasJuego[0];
-
-
         }
 
         internal void FinPartida()
         {
-            throw new NotImplementedException();
+            DesbloquearGestion = true;
         }
 
         internal void GuardarJson()
@@ -298,11 +375,6 @@ namespace JuegoPeliculas
             PeliculaFormulario.Pista = "";
 
 
-        }
-
-        internal void VerPistaSeleccionado()
-        {
-            VerPista = true;
         }
 
         internal void EliminarPelicula()

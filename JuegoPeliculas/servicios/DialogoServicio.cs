@@ -9,10 +9,22 @@ using System.Windows;
 
 namespace JuegoPeliculas
 {
-    class FileDialog : Window
+    class Dialog : Window
 	{
 		string textoJsonCargar;
+        private string v1;
+        private string v2;
         readonly string textoJsonGuardar;
+
+        public Dialog(string v1, string v2)
+        {
+            this.v1 = v1;
+            this.v2 = v2;
+        }
+
+        public Dialog()
+        {
+        }
 
         public string OpenFileJson()
         {
@@ -53,6 +65,13 @@ namespace JuegoPeliculas
 				ruta = saveFileDialog.FileName;
 
 			return ruta;
+		}
+
+		private void DialogoPersonalizado()
+		{
+			Dialog inputDialog = new Dialog("Please enter your name:", "John Doe");
+			//if (inputDialog.ShowDialog() == true)
+				//lblName.Text = inputDialog.Answer;
 		}
 	}
 }

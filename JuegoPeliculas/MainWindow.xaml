@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:JuegoPeliculas"
     mc:Ignorable="d"
-    Title="MainWindow"
+    Title="Juego Películas"
     Height="450"
     Width="800"
     MinHeight="500"
@@ -276,11 +276,11 @@
                             <TextBlock
                                 Width="33">
                                     <Run
-                                    Text="1"></Run>
+                                    Text="{Binding Path=NumPelicula}"></Run>
                                     <Run
                                     Text="/"></Run>
                                     <Run
-                                    Text="5"></Run>
+                                    Text="{Binding Path=NumPeliculasParaAcertar}"></Run>
                             </TextBlock>
                         </Label>
                         <Image
@@ -439,9 +439,9 @@
                                         Background="#FFF8F6E5"
                                         BorderBrush="#F77F00"
                                         x:Name="verPistaCheckBox"
-                                        Checked="verPistaCheckBox_Checked">Ver pista</CheckBox>
+                                        IsChecked="{Binding Path=VerPista}">Ver pista</CheckBox>
                                     <Button
-                                      
+                                        IsEnabled="{Binding Path=PeliAcertada}"
                                         Foreground="#FFFFB05D"
                                         Margin="120,4,20,4"
                                         VerticalAlignment="Top"
@@ -454,6 +454,7 @@
 
                             </StackPanel>
                         </DockPanel>
+                        
                         <Border
                             MaxHeight="200"
                             MaxWidth="380"
@@ -561,26 +562,32 @@
                         Margin="0.333,0,-0.333,0"
                         Grid.RowSpan="3">
                         <Button
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="cargarJsonButton"
                             Click="CargarJsonButton_Click">Cargar de JSON</Button>
                         <Button
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="guardarJsonButton"
                             Click="GuardarJsonButton_Click">Guardar en JSON</Button>
                         <Button
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="añadirPeliculaButton"
                             Click="AñadirPeliculaButton_Click">Añadir película</Button>
                         <Button
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="editarPeliculaButton"
                             Click="EditarPeliculaButton_Click">Editar película</Button>
                         <Button
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="guardarCambiosButton"
                             Click="GuardarCambiosButton_Click">Guardar Cambios</Button>
                         <Button
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ButtonControlTemplate1}"
                             x:Name="eliminarPeliculaButton"
                             Click="EliminarPeliculaButton_Click">Eliminar película</Button>
@@ -593,6 +600,7 @@
                         <TextBlock
                             DockPanel.Dock="Left">Título de la película</TextBlock>
                         <TextBox
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Text="{Binding Path=PeliculaFormulario.Titulo}"
                             x:Name="tituloTextBox"></TextBox>
                     </DockPanel>
@@ -603,6 +611,7 @@
                         <TextBlock
                             DockPanel.Dock="Left">Pista de la película</TextBlock>
                         <TextBox
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Text="{Binding Path=PeliculaFormulario.Pista}"
                             x:Name="pistaTextBox" />
                     </DockPanel>
@@ -612,11 +621,13 @@
                         Grid.Column="0">
                         <TextBlock>Imagen de la película</TextBlock>
                         <TextBox
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Text="{Binding Path=PeliculaFormulario.Cartel}"
                             x:Name="imagenTextBox"></TextBox>
                     </DockPanel>
                     <Button
                         Template="{DynamicResource ButtonControlTemplate1}"
+                        IsEnabled="{Binding Path=DesbloquearGestion}"
                         Width="100"
                         FontSize="12"
                         Margin="8.333,5,0,13"
@@ -638,6 +649,7 @@
                             Margin="10,8,0,0"
                             Width="125">Nivel de dificultad</TextBlock>
                         <ComboBox
+                            IsEnabled="{Binding Path=DesbloquearGestion}"
                             Template="{DynamicResource ComboBoxControlTemplate}"
                             ItemsSource="{Binding Path=ListaNiveles}"
                             SelectedItem="{Binding Path=PeliculaFormulario.Nivel}"
@@ -655,7 +667,8 @@
                             x:Name="generoComboBox"
                             Margin="4"
                             Height="30"
-                            Width="118"></ComboBox>
+                            Width="118"
+                            IsEnabled="{Binding Path=DesbloquearGestion}"></ComboBox>
                     </StackPanel>
                     <ListBox
                         BorderBrush="#F77F00"
