@@ -34,12 +34,10 @@ namespace JuegoPeliculas
                 //Una vez subida, obtenemos la URL para referenciarla
                 var clienteBlobImagen = clienteContenedor.GetBlobClient(nombreImagen);
                 urlImagen = clienteBlobImagen.Uri.AbsoluteUri;
-
-                
-
             }
-            catch(Exception e)
+            catch (Exception)
             {
+
                 //TODO
             }
 

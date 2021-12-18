@@ -8,15 +8,31 @@ namespace JuegoPeliculas
     {
         public void Exportar(ObservableCollection<Pelicula> listaPelis, string ruta) {
 
-            string pelisJson = JsonConvert.SerializeObject(listaPelis);
-            File.WriteAllText(ruta, pelisJson);
+            try
+            {
+                string pelisJson = JsonConvert.SerializeObject(listaPelis);
+                File.WriteAllText(ruta, pelisJson);
+            }
+            catch (System.Exception)
+            {
+
+                //TODO
+            }
+            
 
         }
         public ObservableCollection<Pelicula> Importar(string textoJson)
         {
-            ObservableCollection<Pelicula> lista = 
-                JsonConvert.DeserializeObject<ObservableCollection<Pelicula>>(textoJson);
-
+            ObservableCollection<Pelicula> lista = null;
+            try
+            {
+               lista = JsonConvert.DeserializeObject<ObservableCollection<Pelicula>>(textoJson);
+                
+            }
+            catch (System.Exception)
+            {
+                //TODO
+            }
             return lista;
         }
 

@@ -165,21 +165,29 @@ namespace JuegoPeliculas
         {
             Pelicula peliForm = new Pelicula();
 
-            peliForm.Titulo = PeliculaSeleccionada.Titulo;
-            peliForm.Cartel = PeliculaSeleccionada.Cartel;
-            peliForm.Genero = PeliculaSeleccionada.Genero;
-            peliForm.Pista = PeliculaSeleccionada.Pista;
-            peliForm.Nivel = PeliculaSeleccionada.Nivel;
+            if (PeliculaSeleccionada != null)
+            {
+                peliForm.Titulo = PeliculaSeleccionada.Titulo;
+                peliForm.Cartel = PeliculaSeleccionada.Cartel;
+                peliForm.Genero = PeliculaSeleccionada.Genero;
+                peliForm.Pista = PeliculaSeleccionada.Pista;
+                peliForm.Nivel = PeliculaSeleccionada.Nivel;
 
-            PeliculaFormulario = peliForm;
+                PeliculaFormulario = peliForm;
+
+            }
+
+            
         }
         public void GuardarCambios()
         {
             if (PeliculaFormulario != null)
             {
-                if (!PeliculaFormulario.Titulo.Equals("") &&
+                if (PeliculaFormulario.Titulo != null &&
                         !PeliculaFormulario.Pista.Equals("") &&
-                            !PeliculaFormulario.Cartel.Equals(""))
+                            !PeliculaFormulario.Cartel.Equals("") &&
+                                !PeliculaFormulario.Nivel.Equals("") &&
+                                    PeliculaFormulario.Genero != null)
                 {
 
                     PeliculaSeleccionada.Titulo = PeliculaFormulario.Titulo;
@@ -280,9 +288,14 @@ namespace JuegoPeliculas
 
         internal void NuevaPartida()
         {
-            DesbloquearGestion = false;
-            VerPista = false;
+            if (ListaPeliculasCargadas != null)
+            {
+                DesbloquearGestion = false;
+            }
             
+            VerPista = false;
+            PeliAcertada = true;
+
             NuevoJuego.Aciertos = 0;
             NuevoJuego.Fallos = 0;
             NuevoJuego.Puntuacion = 0;
@@ -330,6 +343,8 @@ namespace JuegoPeliculas
         internal void FinPartida()
         {
             DesbloquearGestion = true;
+            PeliculasSeleccionadasJuego = null;
+            PeliculaSeleccionada = null;
         }
 
         internal void GuardarJson()
@@ -379,7 +394,11 @@ namespace JuegoPeliculas
 
         internal void EliminarPelicula()
         {
-           ListaPeliculasCargadas.Remove(PeliculaSeleccionada);
+           if(PeliculaSeleccionada != null)
+            {
+                ListaPeliculasCargadas.Remove(PeliculaSeleccionada);
+            }
+           
             
         }
 
