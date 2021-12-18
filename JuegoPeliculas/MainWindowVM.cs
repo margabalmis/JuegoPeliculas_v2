@@ -16,7 +16,7 @@ namespace JuegoPeliculas
         readonly JsonServicio json = new JsonServicio();
         readonly AzureBlobStorageServicio azure = new AzureBlobStorageServicio();
         int totalPelis = 0;
-        Random rd = new Random();
+        readonly Random rd = new Random();
         ArrayList numerosPelisPardita;
 
         public MainWindowVM()
@@ -325,7 +325,7 @@ namespace JuegoPeliculas
         {
             NumPelicula = 1;
             NumPeliculasParaAcertar = PeliculasSeleccionadasJuego.Length;
-            int num = rd.Next(totalPelis);
+            int num;
 
             for (int i = 0; i < NUM_PELIS_JUGAR - 1; i++)
             {
@@ -363,12 +363,14 @@ namespace JuegoPeliculas
                             !PeliculaFormulario.Pista.Equals("") &&
                                 !PeliculaFormulario.Cartel.Equals(""))
                     {
-                        Pelicula peliAñadir = new Pelicula();
-                        peliAñadir.Titulo = PeliculaFormulario.Titulo;
-                        peliAñadir.Cartel = PeliculaFormulario.Cartel;
-                        peliAñadir.Genero = PeliculaFormulario.Genero;
-                        peliAñadir.Nivel = PeliculaFormulario.Nivel;
-                        peliAñadir.Pista = PeliculaFormulario.Pista;
+                        Pelicula peliAñadir = new Pelicula
+                        {
+                            Titulo = PeliculaFormulario.Titulo,
+                            Cartel = PeliculaFormulario.Cartel,
+                            Genero = PeliculaFormulario.Genero,
+                            Nivel = PeliculaFormulario.Nivel,
+                            Pista = PeliculaFormulario.Pista
+                        };
                         ListaPeliculasCargadas.Add(peliAñadir);
 
                     }
@@ -419,7 +421,7 @@ namespace JuegoPeliculas
             }
             if (VerPista)
             {
-                puntuacionPeli = puntuacionPeli / 2;
+                puntuacionPeli /= 2;
             }
             return puntuacionPeli;
         }

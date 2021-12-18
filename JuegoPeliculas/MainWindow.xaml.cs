@@ -9,7 +9,7 @@ namespace JuegoPeliculas
     /// </summary>
     public partial class MainWindow : Window
     {
-        private  MainWindowVM vm;
+        private readonly MainWindowVM vm;
         public MainWindow()
         {
             InitializeComponent();
@@ -71,7 +71,7 @@ namespace JuegoPeliculas
             vm.Retroceder();
         }
 
-        private void comprobarRespuestaButton_Click(object sender, RoutedEventArgs e)
+        private void ComprobarRespuestaButton_Click(object sender, RoutedEventArgs e)
         {
             vm.ValidarTitulo();
         }
