@@ -27,8 +27,8 @@
             x:Key="conversorDesenfoque"></local:ConversorDesenfoque>
         <local:ConversorGenero
             x:Key="conversorGenero"></local:ConversorGenero>
-        <local:ConvertidorNivel
-            x:Key="conversorColorNivel"></local:ConvertidorNivel>
+        <local:ConversorNivelColor
+            x:Key="conversorColorNivel"></local:ConversorNivelColor>
 
 
         <!--Plantilla Pelis ListBox -->
@@ -56,7 +56,7 @@
 
         </DataTemplate>
 
-        
+
         <!-- Border generico-->
         <Style
             TargetType="{x:Type Border}">
@@ -150,13 +150,14 @@
                 Value="Hidden"></Setter>
             <Style.Triggers>
                 <DataTrigger
-                    Binding="{Binding ElementName=verPistaCheckBox, Path=IsChecked}" Value="true">
+                    Binding="{Binding ElementName=verPistaCheckBox, Path=IsChecked}"
+                    Value="true">
                     <Setter
                         Property="Visibility"
                         Value="Visible"></Setter>
                 </DataTrigger>
             </Style.Triggers>
-            
+
         </Style>
 
         <!--Label  genérico-->
@@ -262,6 +263,7 @@
                         DockPanel.Dock="Bottom"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
+                        
                         <Image
                             MouseLeftButtonUp="RetrocederPeli"
                             x:Name="flechaRetrocederImage"
@@ -333,33 +335,35 @@
                                             <DockPanel>
                                                 <TextBlock
                                                     HorizontalAlignment="Left"
-                                                    Width="60"
+                                                    Width="68"
                                                     Height="20"
                                                     Margin="4,4,4,4"
                                                     FontSize="16">
                                                 Aciertos:
                                                 </TextBlock>
                                                 <TextBlock
+                                                    Text="{Binding Path=NuevoJuego.Aciertos}"
                                                     x:Name="aciertosTextBlock"
                                                     Width="30"
                                                     MinHeight="20"
-                                                    FontSize="15">4
+                                                    FontSize="15">
                                                 </TextBlock>
                                             </DockPanel>
                                             <DockPanel>
                                                 <TextBlock
                                                     HorizontalAlignment="Left"
-                                                    Width="60"
+                                                    Width="68"
                                                     Height="20"
                                                     Margin="4,4,4,4"
                                                     FontSize="16">
                                                 Fallos:
                                                 </TextBlock>
                                                 <TextBlock
+                                                    Text="{Binding Path=NuevoJuego.Fallos}"
                                                     x:Name="fallosTextBlock"
                                                     Width="30"
                                                     MinHeight="20"
-                                                    FontSize="15">4
+                                                    FontSize="15">
                                                 </TextBlock>
                                             </DockPanel>
                                             <DockPanel>
@@ -375,15 +379,16 @@
                                                     Foreground="#003049"
                                                     x:Name="puntuacionTextBlock"
                                                     Width="30"
-                                                    MinHeight="20"
-                                                    FontSize="28">
+                                                    MinHeight="25"
+                                                    FontSize="28"
+                                                    Text="{Binding Path=NuevoJuego.Puntuacion}">
                                                     <TextBlock.Effect>
                                                         <DropShadowEffect
                                                             BlurRadius="1"
                                                             Color="#F77F00"
                                                             Direction="0"
                                                             ShadowDepth="1" />
-                                                    </TextBlock.Effect>4
+                                                    </TextBlock.Effect>
                                                 </TextBlock>
                                             </DockPanel>
                                         </StackPanel>
@@ -418,6 +423,8 @@
                                 Height="29">Título de la película</Label>
                             <StackPanel>
                                 <TextBox
+                                    Text="{Binding Path=NuevoJuego.TituloParaValidar}"
+                                    x:Name="tituloParaValidarTextBox"
                                     Width="360"
                                     Height="35">
                                 </TextBox>
@@ -431,50 +438,76 @@
                                         FontWeight="Bold"
                                         Background="#FFF8F6E5"
                                         BorderBrush="#F77F00"
-                                        x:Name="verPistaCheckBox">Ver pista</CheckBox>
+                                        x:Name="verPistaCheckBox"
+                                        Checked="verPistaCheckBox_Checked">Ver pista</CheckBox>
                                     <Button
+                                      
                                         Foreground="#FFFFB05D"
                                         Margin="120,4,20,4"
                                         VerticalAlignment="Top"
                                         Height="30"
                                         Template="{DynamicResource ButtonControlTemplate1}"
                                         Width="100"
-                                        x:Name="comprobarRespuestaButton">Validar</Button>
+                                        x:Name="comprobarRespuestaButton"
+                                        Click="comprobarRespuestaButton_Click">Validar</Button>
                                 </StackPanel>
 
                             </StackPanel>
                         </DockPanel>
-                        <StackPanel
-                            Margin="8,8,0,0"
-                            Grid.Row="2"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top">
-
-                            <TextBlock
-                                Style="{StaticResource pistaPeli}"
-                                Margin="10"
-                                x:Name="pistaTextBlock"
-                                Text="{Binding Path=PeliculaSeleccionada.Pista}"></TextBlock>
-                            <Image
-                                Width="40"
-                                Height="40"
-                                x:Name="generoImage"
-                                Source="{Binding Path=PeliculaSeleccionada.Genero, Converter={StaticResource conversorGenero}}"></Image>
-                        </StackPanel>
+                        <Border
+                            MaxHeight="200"
+                            MaxWidth="380"
+                            Margin="8,8,0,8"
+                            Grid.Row="2">
+                            <StackPanel
+                                Orientation="Horizontal">
+                            
+                                    <TextBlock
+                                        Width="240"
+                                        TextWrapping="Wrap"
+                                        Style="{StaticResource pistaPeli}"
+                                        Margin="10"
+                                        x:Name="pistaTextBlock"
+                                        Text="{Binding Path=PeliculaSeleccionada.Pista}"></TextBlock>
+                         
+                                
+                                <Image
+                                    Width="50"
+                                    Height="50"
+                                    x:Name="generoImage"
+                                    Source="{Binding Path=PeliculaSeleccionada.Genero, Converter={StaticResource conversorGenero}}"></Image>
+                            </StackPanel>
+                        </Border>
 
                     </Grid>
-                    
-                    <Image
-                        x:Name="cartelImage"
-                        Stretch="Uniform"
-                        DockPanel.Dock="Left"
-                        Margin="10"
-                        Source="{Binding Path=PeliculaSeleccionada.Cartel}">
-                        <Image.Effect>
-                            <BlurEffect Radius="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorDesenfoque}}"></BlurEffect>
-                        </Image.Effect>
+                    <Border
+                        x:Name="colorNivelBorder"
+                        DockPanel.Dock="Left">
+                        <Border.Background>
+                            <LinearGradientBrush
+                                EndPoint="0.5,1"
+                                MappingMode="RelativeToBoundingBox"
+                                StartPoint="0.5,0">
+                                <GradientStop
+                                    Color="#FFEAE2B7"
+                                    Offset="0.183" />
+                                <GradientStop
+                                    Color="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorColorNivel}}"
+                                    Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Image
+                            x:Name="cartelImage"
+                            Stretch="Uniform"
+                            Margin="10"
+                            Source="{Binding Path=PeliculaSeleccionada.Cartel}">
+                            <Image.Effect>
+                                <BlurEffect
+                                    Radius="{Binding Path=PeliculaSeleccionada.Nivel, Converter={StaticResource conversorDesenfoque}}"></BlurEffect>
+                            </Image.Effect>
+                        </Image>
+                    </Border>
 
-                    </Image>
                 </DockPanel>
 
 

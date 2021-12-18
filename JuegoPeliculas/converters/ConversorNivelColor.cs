@@ -5,28 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace JuegoPeliculas
 {
-    class ConvertidorNivel : IValueConverter
+    class ConversorNivelColor : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string color ="";
-            switch ((string)value)
+            string valor = "";
+
+            switch (value)
             {
                 case "Fácil":
-                    color = "LightGreen";
+                    valor = "#169275";
                     break;
                 case "Normal":
-                    color = "LightRed";
+                    valor = "#F77F00";
                     break;
                 case "Difícil":
-                    color = "LightBlue";
+                    valor = "#D62828";
                     break;
             }
-            return color;
+            return valor;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

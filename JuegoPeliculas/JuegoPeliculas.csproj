@@ -134,9 +134,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConversorDesenfoque.cs" />
-    <Compile Include="ConversorGenero.cs" />
-    <Compile Include="ConvertidorNivel.cs" />
+    <Compile Include="converters\ConversorDesenfoque.cs" />
+    <Compile Include="converters\ConversorGenero.cs" />
+    <Compile Include="converters\ConversorNivelColor.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="MainWindowVM.cs" />
     <Compile Include="servicios\AzureBlobStorageServicio.cs" />

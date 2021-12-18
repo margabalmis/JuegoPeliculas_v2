@@ -17,12 +17,22 @@ namespace JuegoPeliculas
         readonly AzureBlobStorageServicio azure = new AzureBlobStorageServicio();
 
 
+
+
         public MainWindowVM()
         {
             PeliculaFormulario = new Pelicula();
             ListaGeneros = new ObservableCollection<string> { "","Terror", "Comedia", "Drama","Acción","Ciencia Ficción"};
             ListaNiveles = new ObservableCollection<string> { "", "Fácil", "Normal", "Difícil"};
             NumPelicula = 1;
+            VerPista = false;
+        }
+        private Juego nuevoJuego;
+
+        public Juego NuevoJuego
+        {
+            get { return nuevoJuego; }
+            set { SetProperty(ref nuevoJuego, value); }
         }
 
 
@@ -65,12 +75,19 @@ namespace JuegoPeliculas
 
         //Lista de niveles de péliculas
         private ObservableCollection<string> listaNiveles;
+
         public ObservableCollection<string> ListaNiveles
         {
             get { return listaNiveles; }
             set { SetProperty(ref listaNiveles, value); }
         }
+        private Boolean verPista;
 
+        public Boolean VerPista
+        {
+            get { return verPista; }
+            set { SetProperty(ref verPista, value); }
+        }
 
         //Pélicula seleccionada actualmente
         private Pelicula peliculaSeleccionada;
@@ -87,6 +104,29 @@ namespace JuegoPeliculas
             get { return peliculaFormulario; }
             set { SetProperty(ref peliculaFormulario, value); }
         }
+
+        internal void ValidarTitulo()
+        {
+            if (!nuevoJuego.TituloParaValidar.Equals(""))
+            {
+                if (nuevoJuego.TituloParaValidar.ToLower()
+                    == PeliculaSeleccionada.Titulo.ToLower())
+                {
+                    nuevoJuego.Aciertos++;
+                    nuevoJuego.Puntuacion += CalcularPuntuacionPeli();
+                }
+                else
+                {
+                    nuevoJuego.Fallos++;
+                }
+            }
+            else
+            {
+                //TODO
+            }
+        }
+
+
         internal void EditarPelicula()
         {
             Pelicula peliForm = new Pelicula();
@@ -176,29 +216,36 @@ namespace JuegoPeliculas
 
         internal void NuevaPartida()
         {
+
+            NuevoJuego = new Juego();
+            NuevoJuego.Aciertos = 0;
+            NuevoJuego.Fallos = 0;
+            NuevoJuego.Puntuacion = 0;
+
             Random rd = new Random();
             int totalPelis = listaPeliculasCargadas.Count;
+
+            //Posiciones aleatorias de la lista carada en gestion
             ArrayList numerosPelisPardita = new ArrayList();
             int num = rd.Next(totalPelis);
 
             PeliculasSeleccionadasJuego = new Pelicula[5];
 
-
             numerosPelisPardita.Add(num);
+
             PeliculasSeleccionadasJuego[0] = ListaPeliculasCargadas[num];
 
-            for (int i = 0; i < NUM_PELIS_JUGAR -1; i++)
+            for (int i = 0; i < NUM_PELIS_JUGAR - 1; i++)
             {
                 num = rd.Next(totalPelis);
                 while (numerosPelisPardita.Contains(num))
                 {
                     num = rd.Next(totalPelis);
-
                 }
                 numerosPelisPardita.Add(num);
                 PeliculasSeleccionadasJuego[i+1] = ListaPeliculasCargadas[num];
             }
-
+            PeliculaSeleccionada = PeliculasSeleccionadasJuego[0];
 
 
         }
@@ -253,6 +300,10 @@ namespace JuegoPeliculas
 
         }
 
+        internal void VerPistaSeleccionado()
+        {
+            VerPista = true;
+        }
 
         internal void EliminarPelicula()
         {
@@ -260,5 +311,28 @@ namespace JuegoPeliculas
             
         }
 
+        internal int CalcularPuntuacionPeli() 
+        {
+            int puntuacionPeli = 0;
+            switch (PeliculaSeleccionada.Nivel)
+            {
+                case "Fácil":
+                    puntuacionPeli = 2;
+                    break;
+                case "Normal":
+                    puntuacionPeli = 4;
+                    break;
+                case "Difícil":
+                    puntuacionPeli = 6;
+                    break;
+            }
+            if (VerPista)
+            {
+                puntuacionPeli = puntuacionPeli / 2;
+            }
+            return puntuacionPeli;
+        }
+
+     
     }
 }
