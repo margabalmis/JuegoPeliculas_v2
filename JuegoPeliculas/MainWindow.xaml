@@ -449,7 +449,7 @@
                                         Template="{DynamicResource ButtonControlTemplate1}"
                                         Width="100"
                                         x:Name="comprobarRespuestaButton"
-                                        Click="comprobarRespuestaButton_Click">Validar</Button>
+                                        Click="ComprobarRespuestaButton_Click">Validar</Button>
                                 </StackPanel>
 
                             </StackPanel>
