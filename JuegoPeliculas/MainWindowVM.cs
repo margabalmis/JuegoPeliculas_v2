@@ -18,7 +18,7 @@ namespace JuegoPeliculas
         int totalPelis = 0;
         readonly Random rd = new Random();
         ArrayList numerosPelisPardita;
-        string[] nivelesGuardados;
+        readonly string[] nivelesGuardados;
         int contador;
 
         public MainWindowVM()
@@ -168,6 +168,7 @@ namespace JuegoPeliculas
                 }
                 else
                 {
+                    dialogo.Mensajes("!!Intentalo de nuevo!!");
                     nuevoJuego.Fallos++;
                 }
             }
@@ -373,6 +374,8 @@ namespace JuegoPeliculas
                 contador++;
             }
             NuevoJuego.Puntuacion = 0;
+            NuevoJuego.Aciertos = 0;
+            NuevoJuego.Fallos = 0;
             NumPelicula = 0;
             DesbloquearGestion = true;
             PeliculasSeleccionadasJuego = null;
