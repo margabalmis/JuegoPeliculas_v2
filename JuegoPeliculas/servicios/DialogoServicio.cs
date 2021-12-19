@@ -12,15 +12,7 @@ namespace JuegoPeliculas
     class Dialog : Window
 	{
 		string textoJsonCargar;
-		/*
-        private readonly string v1;
-        private readonly string v2;
-
-        public Dialog(string v1, string v2)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-        }*/
+		
 
         public Dialog()
         {
@@ -28,38 +20,40 @@ namespace JuegoPeliculas
 
         public string OpenFileJson()
         {
-			OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Json files (*.json)|*.json"
+            };
 
-			if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true)
 			{
 				textoJsonCargar = File.ReadAllText(openFileDialog.FileName);
 			}
-			else
-			{
-				//TODO
-			}
+
 			return textoJsonCargar;
 		}
 
 		public string OpenFileRuta()
 		{
 			string textoRuta= null;
-			OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Files|*.jpg;*.jpeg;*.png;"
+            };
 
-			if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true)
 			{
 				textoRuta = openFileDialog.FileName;
-			}
-			else
-			{
-				//TODO
 			}
 			return textoRuta;
 		}
 		public string SaveFile()
 		{
-			SaveFileDialog saveFileDialog = new SaveFileDialog();
-			string ruta = "";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Json files (*.json)|*.json"
+            };
+            string ruta = "";
 
 			if (saveFileDialog.ShowDialog() == true)
 				ruta = saveFileDialog.FileName;
@@ -67,11 +61,15 @@ namespace JuegoPeliculas
 			return ruta;
 		}
 
-		private void DialogoPersonalizado()
+		public void Mensajes(string texto)
 		{
-			//Dialog inputDialog = new Dialog("Please enter your name:", "John Doe");
-			//if (inputDialog.ShowDialog() == true)
-				//lblName.Text = inputDialog.Answer;
+			MessageBox.Show(texto, "Información jugador" , MessageBoxButton.OK, MessageBoxImage.Warning);
+
+		}
+		public void MensajeFin(string texto)
+		{
+			MessageBox.Show(texto, "Fin del juego", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
 		}
 	}
 }

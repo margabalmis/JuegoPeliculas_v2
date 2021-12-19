@@ -18,6 +18,8 @@ namespace JuegoPeliculas
         int totalPelis = 0;
         readonly Random rd = new Random();
         ArrayList numerosPelisPardita;
+        string[] nivelesGuardados;
+        int contador;
 
         public MainWindowVM()
         {
@@ -30,6 +32,8 @@ namespace JuegoPeliculas
             DesbloquearGestion = true;
             PeliAcertada = true;
             NumPeliculasParaAcertar = 0;
+            nivelesGuardados = new string[5];
+
         }
         private Juego nuevoJuego;
 
@@ -147,6 +151,19 @@ namespace JuegoPeliculas
                     nuevoJuego.Puntuacion += CalcularPuntuacionPeli();
                     nuevoJuego.TituloParaValidar = "";
 
+                    contador = 0;
+                    foreach (Pelicula p in PeliculasSeleccionadasJuego)
+                    {
+                        
+                        if (p.Equals(PeliculaSeleccionada))
+                        {
+                            nivelesGuardados[contador] = PeliculaSeleccionada.Nivel;
+                        }
+                        contador++;
+                    }
+
+                    ListaNiveles.Add("Acertada");
+                    PeliculaSeleccionada.Nivel = "Acertada";
 
                 }
                 else
@@ -156,7 +173,7 @@ namespace JuegoPeliculas
             }
             else
             {
-                //TODO
+                dialogo.Mensajes("La partida aún no ha comenzado");
             }
         }
 
@@ -181,12 +198,12 @@ namespace JuegoPeliculas
         }
         public void GuardarCambios()
         {
-            if (PeliculaFormulario != null)
+            if (PeliculaFormulario != null && PeliculaSeleccionada !=null)
             {
                 if (PeliculaFormulario.Titulo != null &&
-                        !PeliculaFormulario.Pista.Equals("") &&
-                            !PeliculaFormulario.Cartel.Equals("") &&
-                                !PeliculaFormulario.Nivel.Equals("") &&
+                        PeliculaFormulario.Pista != null &&
+                            PeliculaFormulario.Cartel != null &&
+                                PeliculaFormulario.Nivel != null &&
                                     PeliculaFormulario.Genero != null)
                 {
 
@@ -200,14 +217,14 @@ namespace JuegoPeliculas
                 }
                 else
                 {
-                    //TODO
+                    dialogo.Mensajes("Todos los campos deben estar completos.");
                 }
 
             }
             else
-            { 
-                //TODO
-            
+            {
+                dialogo.Mensajes("No hay cambios para guardar.");
+
             }
             PeliculaFormulario.Titulo = "";
             PeliculaFormulario.Cartel = "";
@@ -342,9 +359,27 @@ namespace JuegoPeliculas
 
         internal void FinPartida()
         {
+            dialogo.MensajeFin("La puntuación final es: " + nuevoJuego.Puntuacion +
+                " ¡¡¡Enhorabuena!!!");
+
+            contador = 0;
+
+            foreach (Pelicula p in PeliculasSeleccionadasJuego)
+            {
+                if (p.Nivel.Equals("Acertada"))
+                {
+                    p.Nivel = nivelesGuardados[contador];
+                }
+                contador++;
+            }
+            NuevoJuego.Puntuacion = 0;
+            NumPelicula = 0;
             DesbloquearGestion = true;
             PeliculasSeleccionadasJuego = null;
             PeliculaSeleccionada = null;
+            PeliAcertada = true;
+            NumPeliculasParaAcertar = 0;
+            ListaNiveles.Remove("Acertada");
         }
 
         internal void GuardarJson()
@@ -361,7 +396,9 @@ namespace JuegoPeliculas
                 {
                     if (!PeliculaFormulario.Titulo.Equals("") &&
                             !PeliculaFormulario.Pista.Equals("") &&
-                                !PeliculaFormulario.Cartel.Equals(""))
+                                !PeliculaFormulario.Cartel.Equals("")&&
+                                PeliculaFormulario.Genero != null &&
+                                PeliculaFormulario.Nivel != null)
                     {
                         Pelicula peliAñadir = new Pelicula
                         {
@@ -376,12 +413,12 @@ namespace JuegoPeliculas
                     }
                     else
                     {
-                        //TODO
+                        dialogo.Mensajes("Todos los campos deben estar completos");
                     }
                 }
                 else
                 {
-                    //TODO
+                    dialogo.Mensajes("La lista debe estar cargada para poder añadir");
                 }
 
             }

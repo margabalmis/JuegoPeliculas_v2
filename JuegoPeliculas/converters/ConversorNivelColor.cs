@@ -25,6 +25,9 @@ namespace JuegoPeliculas
                 case "Difícil":
                     valor = "#D62828";
                     break;
+                case "Acertada":
+                    valor = "#EAE2B7";
+                    break;
             }
             return valor;
         }

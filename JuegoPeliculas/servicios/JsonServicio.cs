@@ -16,7 +16,8 @@ namespace JuegoPeliculas
             catch (System.Exception)
             {
 
-                //TODO
+                Dialog dialogo = new Dialog();
+                dialogo.Mensajes("Se ha producido un error al exportar el archivo");
             }
             
 
@@ -31,7 +32,8 @@ namespace JuegoPeliculas
             }
             catch (System.Exception)
             {
-                //TODO
+                Dialog dialogo = new Dialog();
+                dialogo.Mensajes("Se ha producido un error al importar el archivo");
             }
             return lista;
         }

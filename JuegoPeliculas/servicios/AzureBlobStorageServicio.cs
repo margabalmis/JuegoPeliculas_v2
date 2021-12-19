@@ -37,8 +37,8 @@ namespace JuegoPeliculas
             }
             catch (Exception)
             {
-
-                //TODO
+                Dialog dialogo = new Dialog();
+                dialogo.Mensajes("Se ha producido un error al subir la imagen");
             }
 
             return urlImagen;
